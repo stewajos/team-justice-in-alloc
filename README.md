@@ -4,6 +4,8 @@ App for allocating resources when there is limited supply.
 
 ## Getting Started
 
+You can choose whatever IDE you'd like, but we'd reccomend Android Studio. Some plugins (not used here) may require a [Jetbrains account](https://www.jetbrains.com/). You can download AS [here](https://developer.android.com/studio).
+
 After cloning the project, open `team-justice-in-alloc` in Android Studio. It should install 
 virtual phones for you. If you don't have Flutter and Dart plugins already, you can add those by
 going to `File > Settings > Plugins and adding Flutter`. It will automatically add Dart at this point.
