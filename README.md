@@ -13,7 +13,7 @@ going to `File > Settings > Plugins and adding Flutter`. It will automatically a
 _note - this does not install the SDK's for the corresponding software. Here are some links to help you get that. You will also need the latest version of Java installed._
 [FLutter SDK](https://flutter.dev/docs/get-started/install/windows)
 [Java](https://java.com/en/download/)
-_You also don't explicitly need to install Dart SDK as that comes with the new Flutter SDK, but it's included [here](https://dart.dev/get-dart)_just in case._
+_You also don't explicitly need to install Dart SDK as that comes with the new Flutter SDK, but it's included [here](https://dart.dev/get-dart) just in case._
 
 For a missing AVD (Android Virtual Device) install, check [here](https://abhiandroid.com/androidstudio/create-avd-virtual-device-emulator-android-studio).
 
