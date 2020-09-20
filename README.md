@@ -26,8 +26,11 @@ If you run into where Android License Status is Unknown. Here's a [solution](htt
 
 ## Getting started
 _The Magic CLI words to get you started._
+
 Check to make sure you have everything: `flutter doctor`
+
 Your basic 'get' (imagine npm install): `flutter pub get`
+
 Your basic 'run' (imagine npm serve): `flutter pub run`
 
 ## Connecting to the API
