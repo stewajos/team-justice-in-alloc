@@ -31,7 +31,7 @@ Check to make sure you have everything: `flutter doctor`
 
 Your basic 'get' (imagine npm install): `flutter pub get`
 
-Your basic 'run' (imagine npm serve): `flutter pub run`
+Your basic 'run' (imagine npm serve): `flutter run`
 
 ## Connecting to the API
 
