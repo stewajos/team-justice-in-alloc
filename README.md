@@ -33,6 +33,8 @@ Your basic 'get' (imagine npm install): `flutter pub get`
 
 Your basic 'run' (imagine npm serve): `flutter run`
 
+Run on chrome: `flutter run -d chrome`
+
 ## Connecting to the API
 
 ## Staging deployment
