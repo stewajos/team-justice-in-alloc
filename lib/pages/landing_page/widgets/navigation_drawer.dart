@@ -19,7 +19,8 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    ///Initiate the animation controller which will control the sidebar
+    _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: 300), value: 70.0);
     widthAnimation = Tween<double>(begin: maxWidth, end: minWidth).animate(_animationController);
   }
 
@@ -29,6 +30,7 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
   }
 
   Widget getWidget(context, widget){
+
     return Material(
       elevation: 8.0,
       child: Container(
