@@ -1,6 +1,6 @@
 # Project Alek
 
-App for allocating resources when there is limited supply.
+App for allocating resources when there is limited supply. Written in Flutter with a Firebase backend.
 
 ## Requirements
 
