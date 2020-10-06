@@ -3,6 +3,10 @@ import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget{
+  final String email;
+
+  LandingPage({@required this.email,});
+
   @override
   Widget build(BuildContext context) {
     // TextEditingController emailController = new TextEditingController();
@@ -18,12 +22,14 @@ class LandingPage extends StatelessWidget{
         elevation: 0.0,
         backgroundColor: Colors.blueAccent,
         centerTitle: true,
-        title: Text("Home", style: TextStyle(color: Colors.white)),
+        title: Text("Alek", style: TextStyle(color: Colors.white, fontSize: 20),),
       ),
       body: Stack(
         children: [
-          Container(color: Colors.grey), ///This is where the list of history will go!
-          NavigationDrawer(),
+          Container(color: Colors.grey), ///This is where the list of history will go / other aspects
+          NavigationDrawer(
+            email: email,
+          ),
         ],
       ),
     );
