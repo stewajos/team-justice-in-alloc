@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/team-justice-in-alloc.iml" filepath="$PROJECT_DIR$/team-justice-in-alloc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/allocation_app.iml" filepath="$PROJECT_DIR$/allocation_app.iml" />
     </modules>
   </component>
 </project>

@@ -1,4 +1,5 @@
 import 'package:allocation_app/pages/landing_page/widgets/navigation_drawer.dart';
+import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatelessWidget{
@@ -11,6 +12,9 @@ class LandingPage extends StatelessWidget{
     // TextEditingController emailController = new TextEditingController();
     // TextEditingController participantController = new TextEditingController();
     // TextEditingController supplyQuantController = new TextEditingController();
+
+    DatabaseService dbs = DatabaseService();
+    dbs.updateCount();
 
     return Scaffold(
       backgroundColor: Colors.grey[300],
