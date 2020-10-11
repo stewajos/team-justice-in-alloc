@@ -1,4 +1,3 @@
-import 'package:allocation_app/pages/email_entry_page/email_entry_page.dart';
 import 'package:allocation_app/pages/landing_page/landing_page.dart';
 import 'package:flutter/material.dart';
 
@@ -54,11 +53,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: EmailEntryPage(),
-        ),
-    );
+    return LandingPage();
   }
 }
