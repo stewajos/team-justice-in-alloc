@@ -1,15 +1,13 @@
+import 'package:allocation_app/pages/help_page/help_page.dart';
+import 'package:allocation_app/pages/history_page/history_page.dart';
+import 'package:allocation_app/pages/home_page/home_page.dart';
+import 'package:allocation_app/pages/settings_page/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class NavigationModel {
   String title;
   IconData icon;
+  Widget page;
 
-  NavigationModel({this.title, this.icon});
+  NavigationModel({this.title, this.icon, this.page});
 }
-
-List<NavigationModel> navItems = [
-  NavigationModel(title: "Home", icon: Icons.home),
-  NavigationModel(title: "History", icon: Icons.history),
-  NavigationModel(title: "Settings", icon: Icons.settings),
-  NavigationModel(title: "Help", icon: Icons.help)
-];
