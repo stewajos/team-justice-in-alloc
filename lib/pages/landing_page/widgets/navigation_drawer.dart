@@ -3,25 +3,18 @@ import 'package:allocation_app/pages/landing_page/widgets/side_nav_tile.dart';
 import 'package:flutter/material.dart';
 
 class NavigationDrawer extends StatefulWidget {
-  final String email;
-
-  NavigationDrawer({this.email});
-
   @override
   NavigationDrawerState createState() {
-    return new NavigationDrawerState(userEmail: email);
+    return new NavigationDrawerState();
   }
 }
 class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerProviderStateMixin{
   double maxWidth = 200.0;
   double minWidth = 70.0;
-  bool isCollapsed = true;
+  bool isCollapsed = false;
   AnimationController _animationController;
   Animation<double> widthAnimation;
   int selectedIndex;
-  String userEmail;
-
-  NavigationDrawerState({@required this.userEmail,});
 
   @override
   void initState() {
@@ -46,9 +39,8 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
           child: Column(
             children: [
               SizedBox(height: 10.0,),
-              //ToDo: Fix the email formatting so that a long email will actually fit properly
-              SideNavTile(title: userEmail,icon: Icons.person, aniController: _animationController),
-              Divider(color:Colors.white, height: 30, thickness: 2.0,),
+              SideNavTile(title: 'test@test.com', icon: Icons.person, aniController: _animationController,),
+              Divider(color:Colors.white, height: 40.0, thickness: 2.0,),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
