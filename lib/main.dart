@@ -1,3 +1,4 @@
+import 'package:allocation_app/pages/email_entry_page/email_entry_page.dart';
 import 'package:allocation_app/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -28,9 +29,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: NavigationDrawer(
-      )
-    );
+    return EmailEntryPage();
   }
 }
