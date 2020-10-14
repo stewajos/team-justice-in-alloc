@@ -48,6 +48,7 @@ class EmailEntryPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) {
                     return Scaffold(
                         body: NavigationDrawer(
+                          email: emailInput
                         )
                     );
                   }));
