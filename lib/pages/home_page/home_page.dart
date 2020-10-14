@@ -13,11 +13,18 @@ class HomePage extends StatelessWidget{
 
     return Container(
       color: Colors.white70,
-      child: Stack(
-        children: [
-          Text("This is the home page")
-        ],
-      )
+        child: Container(
+          alignment: Alignment.center,
+          child: FlatButton(
+            
+            color: Colors.blue,
+            height: 50,
+            child: Text("NEW ALLOCATION", style: TextStyle(letterSpacing: 2, color: Colors.white),),
+            onPressed: (){
+              //Go to the next page
+            },
+          ),
+        ),
     );
   }
 }
