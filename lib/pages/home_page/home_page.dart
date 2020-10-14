@@ -1,3 +1,5 @@
+import 'package:allocation_app/model/navigation_model.dart';
+import 'package:allocation_app/pages/allocation_page/allocation_page.dart';
 import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
 
@@ -16,12 +18,15 @@ class HomePage extends StatelessWidget{
         child: Container(
           alignment: Alignment.center,
           child: FlatButton(
-            
+
             color: Colors.blue,
             height: 50,
             child: Text("NEW ALLOCATION", style: TextStyle(letterSpacing: 2, color: Colors.white),),
             onPressed: (){
-              //Go to the next page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AllocationPage())
+              );
             },
           ),
         ),
