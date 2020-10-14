@@ -1,6 +1,8 @@
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list.dart';
 import 'package:flutter/material.dart';
 
+final TextEditingController supplyCountController = new TextEditingController();
+
 class AllocationPage extends StatefulWidget {
   @override
   _AllocationPageState createState() => _AllocationPageState();
@@ -8,13 +10,14 @@ class AllocationPage extends StatefulWidget {
 
 class _AllocationPageState extends State<AllocationPage> {
   var recipientList = new List<String>();
+  var supplyCount = 0;
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController supplyCountController = new TextEditingController();
     TextEditingController nameInputController = new TextEditingController();
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -38,8 +41,8 @@ class _AllocationPageState extends State<AllocationPage> {
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: supplyCountController,
-                inputFormatters: [],
                 decoration: InputDecoration(
                     labelText: "Enter Quantity", border: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.blue, width: 5.0),
@@ -62,6 +65,7 @@ class _AllocationPageState extends State<AllocationPage> {
                          Text("Recipient Name", style: TextStyle(fontSize: 20, color: Colors.blueAccent),),
                          Padding(padding: EdgeInsets.only(top: 10),),
                          TextField(
+                           keyboardType: TextInputType.text,
                            controller: nameInputController,
                            inputFormatters: [],
                            decoration: InputDecoration(
@@ -74,7 +78,6 @@ class _AllocationPageState extends State<AllocationPage> {
                            children: [
                              IconButton(icon: Icon(Icons.west), onPressed: (){
                                Navigator.pop(context);
-                               nameInputController.clear();
                              }),
                              Padding(padding: EdgeInsets.only(left: 100, right:100),),
                              IconButton(icon: Icon(Icons.check), onPressed: (){

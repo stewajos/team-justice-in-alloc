@@ -20,8 +20,9 @@ class AllocationListItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(5),
         child: ListTile(
-          leading: Text(entry),
+          title: Text(entry, style: TextStyle(fontSize: 15,),),
           trailing: FlatButton(
+            padding: EdgeInsets.only(left:50),
             child: Icon(Icons.delete_outline, color: Colors.black,),
             onPressed: (){
               onDelete();
