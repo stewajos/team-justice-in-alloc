@@ -15,6 +15,7 @@ class _AllocationPageState extends State<AllocationPage> {
   @override
   Widget build(BuildContext context) {
     TextEditingController nameInputController = new TextEditingController();
+    TextEditingController autoGenController = new TextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -98,9 +99,64 @@ class _AllocationPageState extends State<AllocationPage> {
                   "ADD RECIPIENT", style: TextStyle(color: Colors.white)),
               color: Colors.blueAccent,
             ),
+            FlatButton(
+              minWidth: 1000,
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context){
+                      return AlertDialog(
+                        contentPadding: EdgeInsets.all(10),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Number of Recipients", style: TextStyle(fontSize: 20, color: Colors.blueAccent),),
+                            Padding(padding: EdgeInsets.only(top: 10),),
+                            TextField(
+                              keyboardType: TextInputType.text,
+                              controller: autoGenController,
+                              inputFormatters: [],
+                              decoration: InputDecoration(
+                                  labelText: "Enter Number", border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue, width: 5.0),
+                              )),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                IconButton(icon: Icon(Icons.west), onPressed: (){
+                                  Navigator.pop(context);
+                                }),
+                                Padding(padding: EdgeInsets.only(left: 100, right:100),),
+                                IconButton(icon: Icon(Icons.check), onPressed: (){
+                                  if(recipientList.length > 0){
+                                    setState(() {
+                                      recipientList = new List<String>();
+                                    });
+                                  }
+                                  var genCount = int.parse(autoGenController.text);
+                                  for(var i = 0; i <= genCount; i++){
+                                    setState(() {
+                                      recipientList.insert(i, "# ${i + 1}" + " " + "Recipient");
+                                    });
+                                  }
+                                })
+                              ],
+                            )
+                          ],
+                        ),
+                      );
+                    }
+                );
+              },
+              child: Text(
+                  "AUTO GENERATE", style: TextStyle(color: Colors.white)),
+              color: Colors.blueAccent,
+            ),
             Container(
               width: 1000,
-              height: 400,
+              height: 300,
               child: AllocationList(
                 items: recipientList,
               ),
