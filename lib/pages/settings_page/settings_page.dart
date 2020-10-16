@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:allocation_app/pages/settings_page/widgets/settings_form.dart';
 import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
@@ -48,12 +46,12 @@ class SettingsPageState extends State<SettingsPage>{
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 50),
+                  padding: EdgeInsets.only(top: 60, left: 210),
                   child: FlatButton(
                       onPressed: () {
                         
                       },
-                      child: Text("Save Email")
+                      child: Text("Save Email"),
                   ),
                 )
               ],
