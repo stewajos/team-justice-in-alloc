@@ -155,6 +155,16 @@ class _AllocationPageState extends State<AllocationPage> {
                   "AUTO GENERATE", style: TextStyle(color: Colors.white)),
               color: Colors.blueAccent,
             ),
+            FlatButton(
+              minWidth: 1000,
+              color: Colors.blueAccent,
+              child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
+              onPressed: (){
+                setState(() {
+                  recipientList.clear();
+                });
+              },
+            ),
             Container(
               width: 1000,
               height: 300,
