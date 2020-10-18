@@ -1,4 +1,5 @@
 import 'package:allocation_app/model/navigation_model.dart';
+import 'package:allocation_app/pages/allocation_page/allocation_page.dart';
 import 'package:allocation_app/pages/help_page/help_page.dart';
 import 'package:allocation_app/pages/history_page/history_page.dart';
 import 'package:allocation_app/pages/home_page/home_page.dart';
