@@ -19,6 +19,7 @@ class EmailEntryPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 70, right: 70, top: 20),
                   child: TextField(
+                    autofocus: false,
                     controller: emailController,
                     inputFormatters: [],
                     decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(
@@ -48,6 +49,7 @@ class EmailEntryPage extends StatelessWidget {
                   MaterialPageRoute(builder: (context) {
                     return Scaffold(
                         body: NavigationDrawer(
+                          email: emailInput
                         )
                     );
                   }));

@@ -28,10 +28,22 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
   Animation<double> widthAnimation;
   String userEmail;
   List<NavigationModel> navItems = [
-    NavigationModel(title: "Home", icon: Icons.home, page: HomePage()),
-    NavigationModel(title: "History", icon: Icons.history, page: HistoryPage()),
-    NavigationModel(title: "Settings", icon: Icons.settings, page: SettingsPage()),
-    NavigationModel(title: "Help", icon: Icons.help, page: HelpPage())
+    NavigationModel(
+        title: "Home",
+        icon: Icons.home,
+        page: HomePage()),
+    NavigationModel(
+        title: "History",
+        icon: Icons.history,
+        page: HistoryPage()),
+    NavigationModel(
+        title: "Settings",
+        icon: Icons.settings,
+        page: SettingsPage()),
+    NavigationModel(
+        title: "Help",
+        icon: Icons.help,
+        page: HelpPage())
   ];
 
   NavigationDrawerState(
@@ -74,7 +86,7 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
             children: [
               SizedBox(height: 60.0,),
               SideNavTile(
-                title: "Email here",
+                title: userEmail,
                 icon: Icons.person,
                 aniController: _animationController,),
               Divider(
