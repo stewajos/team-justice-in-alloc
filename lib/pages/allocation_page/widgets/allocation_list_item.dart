@@ -17,6 +17,7 @@ class AllocationListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 3,
+      color: Colors.white60,
       child: Padding(
         padding: EdgeInsets.all(5),
         child: ListTile(
