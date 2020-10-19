@@ -1,4 +1,8 @@
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list.dart';
+import 'package:allocation_app/model/result_model.dart';
+import 'package:allocation_app/pages/report_page/report_page.dart';
+import 'package:allocation_app/services/result_mapper.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
 final TextEditingController supplyCountController = new TextEditingController();
@@ -11,6 +15,25 @@ class AllocationPage extends StatefulWidget {
 class _AllocationPageState extends State<AllocationPage> {
   var recipientList = new List<String>();
   var supplyCount = 0;
+  final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
+    functionName: 'getSelection',
+  );
+
+  List<int> convertListToInt(List<dynamic> from){
+    List<int> to = new List();
+    from.forEach((element) { 
+      to.add(element);      
+    });
+    return to;
+  }
+  
+  List<String> filterRecipients(List<int> filter, List<String> items){
+    List<String> filteredItems = new List();
+    for(int i = 0; i < filter.length; i++){
+      filteredItems.add(items[filter[i]]);
+    }
+    return filteredItems;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,10 +46,33 @@ class _AllocationPageState extends State<AllocationPage> {
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            FlatButton(onPressed: () {
-              ///Add the submit button that sends data to API using the
-              ///supplyCount number and the data from the name list
-            },
+            FlatButton(
+                onPressed: () {
+                  callable.call(<String, dynamic>{
+                    "recipients": recipientList.length,
+                    "supply": 3
+                  },).then((value){
+                    //display report page
+
+                    print(value.data);
+                    if(value.data != 'invalid data'){
+                      print(value.data["selection"]);
+                      List<dynamic> temp = value.data["selection"];
+                      List<String> filteredRecipients = filterRecipients(convertListToInt(temp), recipientList);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) {
+                          return ReportPage(
+                            recipients: value.data["recipients"],
+                            supply: value.data["supply"],
+                            timestamp: value.data["timestamp"],
+                            selection: filteredRecipients,
+                          );
+                        }),
+                      );
+                    }
+                  });
+                },
                 child: Text("SUBMIT", style: TextStyle(color: Colors.white),)),
           ],
         ),

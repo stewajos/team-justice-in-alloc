@@ -10,8 +10,8 @@ class HomePage extends StatelessWidget{
     // TextEditingController participantController = new TextEditingController();
     // TextEditingController supplyQuantController = new TextEditingController();
 
-    DatabaseService dbs = DatabaseService();
-    dbs.updateCount();
+    ///DatabaseService dbs = DatabaseService();
+    //dbs.updateCount();
 
     return Container(
       color: Colors.white70,
