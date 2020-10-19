@@ -126,7 +126,7 @@ class _AllocationPageState extends State<AllocationPage> {
                              IconButton(icon: Icon(Icons.west), onPressed: (){
                                Navigator.pop(context);
                              }),
-                             Padding(padding: EdgeInsets.only(left: 100, right:100),),
+                             Padding(padding: EdgeInsets.only(left: 100),),
                              IconButton(icon: Icon(Icons.check), onPressed: (){
                                setState(() {
                                  recipientList.add(nameInputController.text);
@@ -174,7 +174,7 @@ class _AllocationPageState extends State<AllocationPage> {
                                 IconButton(icon: Icon(Icons.west), onPressed: (){
                                   Navigator.pop(context);
                                 }),
-                                Padding(padding: EdgeInsets.only(left: 100, right:100),),
+                                Padding(padding: EdgeInsets.only(left: 100, right:60),),
                                 IconButton(icon: Icon(Icons.check), onPressed: (){
                                   if(recipientList.length > 0){
                                     setState(() {
@@ -182,11 +182,12 @@ class _AllocationPageState extends State<AllocationPage> {
                                     });
                                   }
                                   var genCount = int.parse(autoGenController.text);
-                                  for(var i = 0; i <= genCount; i++){
+                                  for(var i = 0; i < genCount; i++){
                                     setState(() {
-                                      recipientList.insert(i, "# ${i + 1}" + " " + "Recipient");
+                                      recipientList.insert(i, "# ${i+1}" + " " + "Recipient");
                                     });
                                   }
+                                  Navigator.pop(context);
                                 })
                               ],
                             )
@@ -200,12 +201,28 @@ class _AllocationPageState extends State<AllocationPage> {
                   "AUTO GENERATE", style: TextStyle(color: Colors.white)),
               color: Colors.blueAccent,
             ),
+            FlatButton(
+              minWidth: 1000,
+              color: Colors.blueAccent,
+              child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
+              onPressed: (){
+                setState(() {
+                  recipientList.clear();
+                });
+              },
+            ),
             Container(
               width: 1000,
               height: 300,
               child: AllocationList(
                 items: recipientList,
               ),
+            ),
+            Padding(
+              padding: EdgeInsets.all(5),
+              child:  Text("Number of entries: " +  (recipientList.length > 0 ?
+              (recipientList.length).toString() : "0"),
+                style:  TextStyle(fontSize: 15,),),
             ),
           ],
         ),
