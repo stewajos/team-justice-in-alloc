@@ -48,14 +48,14 @@ class _AllocationPageState extends State<AllocationPage> {
           children: [
             FlatButton(
                 onPressed: () {
+                  print(recipientList.length);
+                  print(supplyCount);
                   callable.call(<String, dynamic>{
-                    "recipients": recipientList.length,
-                    "supply": 3
+                    "recipients": recipientList.length - 1,
+                    "supply": int.parse(supplyCountController.text)
                   },).then((value){
-                    //display report page
-
                     print(value.data);
-                    if(value.data != 'invalid data'){
+                    if(value.data != 'invalid data'){ //add else to make a notification of improper data
                       print(value.data["selection"]);
                       List<dynamic> temp = value.data["selection"];
                       List<String> filteredRecipients = filterRecipients(convertListToInt(temp), recipientList);
