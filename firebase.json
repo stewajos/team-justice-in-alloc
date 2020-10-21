@@ -9,7 +9,8 @@
     ]
   },
   "hosting": {
-    "public": "public",
+    "site": "project-alek",
+    "public": "build/web",
     "ignore": [
       "firebase.json",
       "**/.*",
