@@ -18,12 +18,13 @@ class DatabaseService {
         .update({"count": FieldValue.increment(1)});
   }
 
-  Future sendResult(recipients, supply, timestamp, selection) async {
+  Future sendResult(recipients, supply, timestamp, selection, hash) async {
     return await databaseCollection.doc().set({
-      recipients: recipients,
-      supply: supply,
-      timestamp: timestamp,
-      selection: selection
+      "recipients": recipients,
+      "supply": supply,
+      "timestamp": timestamp,
+      "selection": selection,
+      "hash": hash
     });
   }
 }
