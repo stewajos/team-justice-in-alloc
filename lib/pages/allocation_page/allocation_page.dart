@@ -85,7 +85,7 @@ class _AllocationPageState extends State<AllocationPage> {
                         context,
                         MaterialPageRoute(builder: (context) {
                           return ReportPage(
-                            recipients: value.data["recipients"],
+                            recipients: value.data["recipients"] + 1,
                             supply: value.data["supply"],
                             timestamp: value.data["timestamp"],
                             selection: filteredRecipients,
