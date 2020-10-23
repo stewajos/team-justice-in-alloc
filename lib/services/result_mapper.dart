@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:allocation_app/model/result_model.dart';
-class ResultMapper{
+
+class ResultMapper {
   ResultMapper();
 
   /* To help us out, here's what a result json should look like:
