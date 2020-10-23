@@ -1,9 +1,10 @@
+import 'package:allocation_app/model/recipient_model.dart';
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list_item.dart';
 import 'package:flutter/material.dart';
 
 class AllocationList extends StatefulWidget {
 
-  final List<String> items;
+  final List<RecipientModel> items;
 
   AllocationList({
     @required this.items,
@@ -24,7 +25,6 @@ class _AllocationListState extends State<AllocationList>{
             key: new Key(index.toString()),
             entry: item,
             itemList: widget.items,
-            onDelete: () => _deleteItem(index),
           );
         }
     );

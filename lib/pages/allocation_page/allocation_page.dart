@@ -1,8 +1,11 @@
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list.dart';
-import 'package:allocation_app/model/result_model.dart';
+import 'package:allocation_app/model/recipient_model.dart';
+import 'package:allocation_app/providers/allocation_provider.dart';
+import 'package:provider/provider.dart';
+//import 'package:allocation_app/model/result_model.dart';
 import 'package:allocation_app/pages/report_page/report_page.dart';
 import 'package:allocation_app/services/database.dart';
-import 'package:allocation_app/services/result_mapper.dart';
+//import 'package:allocation_app/services/result_mapper.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +32,9 @@ class _AllocationPageState extends State<AllocationPage> {
     return to;
   }
 
-  List<String> filterRecipients(List<int> filter, List<String> items) {
-    List<String> filteredItems = new List();
+  List<RecipientModel> filterRecipients(
+      List<int> filter, List<RecipientModel> items) {
+    List<RecipientModel> filteredItems = new List();
     for (int i = 0; i < filter.length; i++) {
       filteredItems.add(items[filter[i]]);
     }
@@ -41,6 +45,7 @@ class _AllocationPageState extends State<AllocationPage> {
   Widget build(BuildContext context) {
     TextEditingController nameInputController = new TextEditingController();
     TextEditingController autoGenController = new TextEditingController();
+    final allocationProvider = Provider.of<AllocationProvider>(context);
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -50,11 +55,12 @@ class _AllocationPageState extends State<AllocationPage> {
           children: [
             FlatButton(
                 onPressed: () {
-                  print(recipientList.length);
+                  print(allocationProvider.state.recipientList.length);
                   print(supplyCount);
                   callable.call(
                     <String, dynamic>{
-                      "recipients": recipientList.length - 1,
+                      "recipients":
+                          allocationProvider.state.recipientList.length - 1,
                       "supply": int.parse(supplyCountController.text)
                     },
                   ).then((value) {
@@ -63,8 +69,9 @@ class _AllocationPageState extends State<AllocationPage> {
                       //add else to make a notification of improper data
                       print(value.data["selection"]);
                       List<dynamic> temp = value.data["selection"];
-                      List<String> filteredRecipients = filterRecipients(
-                          convertListToInt(temp), recipientList);
+                      List<RecipientModel> filteredRecipients =
+                          filterRecipients(convertListToInt(temp),
+                              allocationProvider.state.recipientList);
 
                       //send results to db
                       db.sendResult(
@@ -165,11 +172,10 @@ class _AllocationPageState extends State<AllocationPage> {
                                 IconButton(
                                     icon: Icon(Icons.check),
                                     onPressed: () {
-                                      setState(() {
-                                        recipientList
-                                            .add(nameInputController.text);
-                                        Navigator.pop(context);
-                                      });
+                                      allocationProvider.addListItem(
+                                          RecipientModel(
+                                              id: nameInputController.text));
+                                      Navigator.pop(context);
                                     })
                               ],
                             )
@@ -228,17 +234,20 @@ class _AllocationPageState extends State<AllocationPage> {
                                 IconButton(
                                     icon: Icon(Icons.check),
                                     onPressed: () {
-                                      if (recipientList.length > 0) {
-                                        setState(() {
-                                          recipientList = new List<String>();
-                                        });
+                                      if (allocationProvider
+                                              .state.recipientList.length >
+                                          0) {
+                                        allocationProvider.resetList();
                                       }
                                       var genCount =
                                           int.parse(autoGenController.text);
                                       for (var i = 0; i < genCount; i++) {
                                         setState(() {
-                                          recipientList.insert(i,
-                                              "# ${i + 1}" + " " + "Recipient");
+                                          allocationProvider.addListItem(
+                                              RecipientModel(
+                                                  id: "# ${i + 1}" +
+                                                      " " +
+                                                      "Recipient"));
                                         });
                                       }
                                       Navigator.pop(context);
@@ -260,7 +269,7 @@ class _AllocationPageState extends State<AllocationPage> {
               child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
               onPressed: () {
                 setState(() {
-                  recipientList.clear();
+                  allocationProvider.resetList();
                 });
               },
             ),
@@ -268,15 +277,16 @@ class _AllocationPageState extends State<AllocationPage> {
               width: 1000,
               height: 300,
               child: AllocationList(
-                items: recipientList,
+                items: allocationProvider.state.recipientList,
               ),
             ),
             Padding(
               padding: EdgeInsets.all(5),
               child: Text(
                 "Number of entries: " +
-                    (recipientList.length > 0
-                        ? (recipientList.length).toString()
+                    (allocationProvider.state.recipientList.length > 0
+                        ? (allocationProvider.state.recipientList.length)
+                            .toString()
                         : "0"),
                 style: TextStyle(
                   fontSize: 15,

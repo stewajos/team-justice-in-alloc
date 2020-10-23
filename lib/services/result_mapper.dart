@@ -3,7 +3,6 @@ import 'package:allocation_app/model/result_model.dart';
 
 class ResultMapper {
   ResultMapper();
-
   /* To help us out, here's what a result json should look like:
   * value.data = {
   *   'recipients': 5,
@@ -11,7 +10,7 @@ class ResultMapper {
   *   'timestamp': Mon, 19 Oct 2020 03:45:36 GMT
   *   'selection': [4, 2, 5]
   * } */
-  static Result fromJson(String jsonString) {
+  static ResultModel fromJson(String jsonString) {
     Map<String, dynamic> json = jsonDecode(jsonString);
     int supply = json["supply"];
     int recipients = json["recipients"];
@@ -21,7 +20,9 @@ class ResultMapper {
     dynamicLst.forEach((selected) {
       selection.add(selected);
     });
-    Result r = new Result(supply, recipients, timestamp, selection);
+    //todo: Add the hashKey to this model
+    ResultModel r = new ResultModel(
+        supply: supply, recipients: recipients, timestamp: timestamp);
     return r;
   }
 }

@@ -1,13 +1,14 @@
 import 'package:allocation_app/pages/history_page/widgets/history_list.dart';
+import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HistoryPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // TextEditingController emailController = new TextEditingController();
-    // TextEditingController participantController = new TextEditingController();
-    // TextEditingController supplyQuantController = new TextEditingController();
 
+    final allocationProvider = Provider.of<AllocationProvider>(context);
+    allocationProvider.getHistory();
 
     return Container(
         color: Colors.white70,
@@ -26,7 +27,8 @@ class HistoryPage extends StatelessWidget{
             width: 1000,
             height: 1000,
             child: HistoryList(
-              histList: ["#1231232 Test Item For History"], //ToDo: Add actual list of history loaded from device
+              histList: allocationProvider.state.allocHistList,
+              //ToDo: Add actual list of history loaded from device using email as key
             ),
           ),
         ),

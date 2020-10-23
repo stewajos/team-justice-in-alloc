@@ -1,6 +1,8 @@
 import 'package:allocation_app/pages/settings_page/widgets/settings_form.dart';
+import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SettingsPage extends StatefulWidget{
   String email;
@@ -23,6 +25,9 @@ class SettingsPageState extends State<SettingsPage>{
 
   @override
   Widget build(BuildContext context) {
+    final allocationProvider = Provider.of<AllocationProvider>(context);
+    final emailController = new TextEditingController();
+
     return Stack(
       children: [
         Container(
@@ -33,12 +38,7 @@ class SettingsPageState extends State<SettingsPage>{
                 Padding(
                   padding: EdgeInsets.only(bottom: 50),
                   child: TextField(
-                    onSubmitted: (String value) {
-                      this.userEmail = value;
-                    },
-                    onChanged: (String value) {
-                      this.userEmail = value;
-                    },
+                    controller: emailController,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'email'
@@ -49,7 +49,7 @@ class SettingsPageState extends State<SettingsPage>{
                   padding: EdgeInsets.only(top: 60, left: 210),
                   child: FlatButton(
                       onPressed: () {
-                        
+                        allocationProvider.setEmail(emailController.text);
                       },
                       child: Text("Save Email"),
                   ),
@@ -63,7 +63,9 @@ class SettingsPageState extends State<SettingsPage>{
           child: Stack(
               children: [
                 RaisedButton(
-                  onPressed: null,
+                  onPressed: (){
+                    allocationProvider.deleteHistory(); //toDo: Make sure it only deleted specific user data
+                  },
                   child: Text("Delete Data"),
                 )
               ]
