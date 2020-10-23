@@ -68,11 +68,11 @@ class _AllocationPageState extends State<AllocationPage> {
 
                       //send results to db
                       db.sendResult(
-                        value.data["recipients"].toString(),
-                        value.data["supply"].toString(),
-                        value.data["timestamp"].toString(),
-                        temp.toString(),
-                      );
+                          value.data["recipients"].toString(),
+                          value.data["supply"].toString(),
+                          value.data["timestamp"].toString(),
+                          temp.toString(),
+                          "no hash for now");
 
                       Navigator.push(
                         context,
