@@ -1,10 +1,14 @@
 import 'dart:convert';
 
-class Result {
+class ResultModel {
+  final String email;
   final int supply;
   final int recipients;
+  final String hashKey;
   final String timestamp;
-  final List<int> selection;
+  final List<String> selection;
 
-  Result(this.supply, this.recipients, this.timestamp, this.selection);
+  ResultModel({this.supply, this.email, this.recipients, this.hashKey, this.timestamp, this.selection});
+
 }
+

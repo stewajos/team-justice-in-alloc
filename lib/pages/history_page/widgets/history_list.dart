@@ -1,3 +1,4 @@
+import 'package:allocation_app/model/result_model.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'history_list_item.dart';
@@ -6,7 +7,7 @@ class HistoryList extends StatefulWidget{
 
   _HistoryListState createState() => _HistoryListState();
 
-  final List<String> histList;
+  final List<ResultModel> histList;
 
   HistoryList({
    @required this.histList,

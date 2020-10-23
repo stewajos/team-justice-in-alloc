@@ -4,19 +4,17 @@ import 'package:allocation_app/pages/help_page/help_page.dart';
 import 'package:allocation_app/pages/history_page/history_page.dart';
 import 'package:allocation_app/pages/home_page/home_page.dart';
 import 'package:allocation_app/pages/settings_page/settings_page.dart';
+import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/widgets/side_nav_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class NavigationDrawer extends StatefulWidget {
-  String email; //Wasn't sure if we wan't to keep this final, for now.
-
-  NavigationDrawer({this.email});
-
   int selectedIndex = 0;
 
   @override
   NavigationDrawerState createState() {
-    return new NavigationDrawerState(userEmail: email);
+    return new NavigationDrawerState();
   }
 }
 
@@ -26,7 +24,7 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
   bool isCollapsed = true;
   AnimationController _animationController;
   Animation<double> widthAnimation;
-  String userEmail;
+
   List<NavigationModel> navItems = [
     NavigationModel(
         title: "Home",
@@ -45,12 +43,6 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
         icon: Icons.help,
         page: HelpPage())
   ];
-
-  NavigationDrawerState(
-      {
-        @required this.userEmail
-      }
-  );
 
   @override
   void initState() {
@@ -77,6 +69,9 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
   }
 
   Widget getWidget(context, child){
+
+    final allocationProvider = Provider.of<AllocationProvider>(context);
+
     return Material(
       elevation: 8.0,
       child: Container(
@@ -86,7 +81,7 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
             children: [
               SizedBox(height: 60.0,),
               SideNavTile(
-                title: userEmail,
+                title: allocationProvider.state.userEmail,
                 icon: Icons.person,
                 aniController: _animationController,),
               Divider(
