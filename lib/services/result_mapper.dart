@@ -1,10 +1,7 @@
 import 'dart:convert';
 import 'package:allocation_app/model/result_model.dart';
-import 'package:allocation_app/providers/allocation_provider.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class ResultMapper{
+class ResultMapper {
   ResultMapper();
   /* To help us out, here's what a result json should look like:
   * value.data = {
@@ -24,7 +21,8 @@ class ResultMapper{
       selection.add(selected);
     });
     //todo: Add the hashKey to this model
-    ResultModel r = new ResultModel(supply: supply, recipients: recipients, timestamp: timestamp);
+    ResultModel r = new ResultModel(
+        supply: supply, recipients: recipients, timestamp: timestamp);
     return r;
   }
 }
