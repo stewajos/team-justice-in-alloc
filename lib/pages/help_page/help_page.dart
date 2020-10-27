@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 class HelpPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // TextEditingController emailController = new TextEditingControlle r();
+    // TextEditingController emailController = new TextEditingController();
     // TextEditingController participantController = new TextEditingController();
     // TextEditingController supplyQuantController = new TextEditingController();
 
@@ -27,11 +27,13 @@ class HelpPage extends StatelessWidget{
                 textAlign: TextAlign.center)
           ],
      ),
+       centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(40),
         child: Column(
           children: [
+
             Text(
               "Patch Notes",
           textAlign: TextAlign.center,
