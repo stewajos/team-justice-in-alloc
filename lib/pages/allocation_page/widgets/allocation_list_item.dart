@@ -1,31 +1,35 @@
+import 'package:allocation_app/model/recipient_model.dart';
+import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AllocationListItem extends StatelessWidget {
 
-  final String entry;
-  final List<String> itemList;
-  final VoidCallback onDelete;
+  final RecipientModel entry;
+  final List<RecipientModel> itemList;
 
   AllocationListItem({
     Key key,
     @required this.entry,
     @required this.itemList,
-    @required this.onDelete,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final allocationProvider = Provider.of<AllocationProvider>(context);
+
     return Card(
       elevation: 3,
+      color: Colors.white60,
       child: Padding(
         padding: EdgeInsets.all(5),
         child: ListTile(
-          title: Text(entry, style: TextStyle(fontSize: 15,),),
+          title: Text(entry.id, style: TextStyle(fontSize: 15,),),
           trailing: FlatButton(
             padding: EdgeInsets.only(left:50),
             child: Icon(Icons.delete_outline, color: Colors.black,),
             onPressed: (){
-              onDelete();
+              allocationProvider.deleteListItem(entry);
             },
           ),
         ),

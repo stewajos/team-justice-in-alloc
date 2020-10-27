@@ -1,10 +1,13 @@
+import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/widgets/navigation_drawer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class EmailEntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final allocationProvider = Provider.of<AllocationProvider>(context);
+
     TextEditingController emailController = new TextEditingController();
     var emailInput;
 
@@ -19,6 +22,7 @@ class EmailEntryPage extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.only(left: 70, right: 70, top: 20),
                   child: TextField(
+                    autofocus: false,
                     controller: emailController,
                     inputFormatters: [],
                     decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(
@@ -42,13 +46,12 @@ class EmailEntryPage extends StatelessWidget {
             ),
             Padding(padding: EdgeInsets.only(left: 80, right: 80)),
             FlatButton(onPressed:(){
-              emailInput = emailController.text;
+              allocationProvider.state.userEmail = emailController.text;
               Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) {
                     return Scaffold(
-                        body: NavigationDrawer(
-                        )
+                        body: NavigationDrawer()
                     );
                   }));
             },

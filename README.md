@@ -35,7 +35,10 @@ Your basic 'run' (imagine npm serve): `flutter run`
 
 Run on chrome: `flutter run -d chrome`
 
+_helpful hints: if your system isn't recognizing flutter commands, try following the steps [here](https://stackoverflow.com/questions/53636255/flutter-is-not-recognized-as-an-internal-and-external-command)_
+
 ## Connecting to the API
+_Api endpoints coming soon..._
 
 ## Staging deployment
 

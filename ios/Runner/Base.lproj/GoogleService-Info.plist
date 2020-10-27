@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>935483519937-j1k4p3bsbb6rj4huvnclv8057uh6coq5.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.935483519937-j1k4p3bsbb6rj4huvnclv8057uh6coq5</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBvbZRvadmfr9lldllrEL_xvN0lT__dpg0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>935483519937</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>io.flutter.projectalek</string>
+	<key>PROJECT_ID</key>
+	<string>project-alek</string>
+	<key>STORAGE_BUCKET</key>
+	<string>project-alek.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:935483519937:ios:2dc225d9aaec45d3a83540</string>
+	<key>DATABASE_URL</key>
+	<string>https://project-alek.firebaseio.com</string>
+</dict>
+</plist>

@@ -7,10 +7,10 @@
   <key>CFBundleExecutable</key>
   <string>App</string>
   <key>CFBundleIdentifier</key>
-  <string>io.flutter.flutter.app</string>
+  <string>io.flutter.projectalek</string>
   <key>CFBundleInfoDictionaryVersion</key>
   <string>6.0</string>
-  <key>CFBundleName</key>
+  <key>ProjectAlek</key>
   <string>App</string>
   <key>CFBundlePackageType</key>
   <string>FMWK</string>
