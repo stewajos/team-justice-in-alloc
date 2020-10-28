@@ -19,12 +19,13 @@ class AllocationListItem extends StatelessWidget {
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
     return Card(
+      shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
       elevation: 3,
       color: Colors.white60,
       child: Padding(
-        padding: EdgeInsets.all(5),
+        padding: EdgeInsets.all(2),
         child: ListTile(
-          title: Text(entry.id, style: TextStyle(fontSize: 15,),),
+          title: Text(entry.id, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
           trailing: FlatButton(
             padding: EdgeInsets.only(left:50),
             child: Icon(Icons.delete_outline, color: Colors.black,),

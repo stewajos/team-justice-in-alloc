@@ -110,7 +110,7 @@ class _AllocationPageState extends State<AllocationPage> {
         ),
       ),
       body: Container(
-        padding: EdgeInsets.all(40),
+        padding: EdgeInsets.only(left: 30, right: 30, top:40),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -133,8 +133,9 @@ class _AllocationPageState extends State<AllocationPage> {
                     )),
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 20)),
+            Padding(padding: EdgeInsets.only(top: 10)),
             FlatButton(
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
               minWidth: 1000,
               onPressed: () {
                 showDialog(
@@ -196,6 +197,7 @@ class _AllocationPageState extends State<AllocationPage> {
               color: Colors.blueAccent,
             ),
             FlatButton(
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
               minWidth: 1000,
               onPressed: () {
                 showDialog(
@@ -271,6 +273,7 @@ class _AllocationPageState extends State<AllocationPage> {
               color: Colors.blueAccent,
             ),
             FlatButton(
+              shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
               minWidth: 1000,
               color: Colors.blueAccent,
               child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
@@ -288,7 +291,7 @@ class _AllocationPageState extends State<AllocationPage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(5),
+              padding: EdgeInsets.only(top: 20, left: 5),
               child: Text(
                 "Number of entries: " +
                     (allocationProvider.state.recipientList.length > 0
@@ -297,6 +300,8 @@ class _AllocationPageState extends State<AllocationPage> {
                         : "0"),
                 style: TextStyle(
                   fontSize: 15,
+                  fontWeight: FontWeight.w400
+
                 ),
               ),
             ),
