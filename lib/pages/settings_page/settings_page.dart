@@ -28,51 +28,68 @@ class SettingsPageState extends State<SettingsPage>{
     final allocationProvider = Provider.of<AllocationProvider>(context);
     final emailController = new TextEditingController();
 
-    return Stack(
-      children: [
-        Container(
-            padding: EdgeInsets.all(5.0),
-            color: Colors.white70,
-            child: Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 50),
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'email'
-                    ),
-                  ),
+    return Container(
+            color: Colors.white,
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: PreferredSize(
+                preferredSize: Size.fromHeight(80),
+                child: AppBar(
+                  elevation: 3,
+                  centerTitle: true,
+                  leading: Container(),
+                  title: Text("\n" + "Settings"),
+                  backgroundColor: Colors.blueAccent,
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 60, left: 210),
-                  child: FlatButton(
-                      onPressed: () {
-                        allocationProvider.setEmail(emailController.text);
-                      },
-                      child: Text("Save Email"),
-                  ),
-                )
-              ],
-            ),
-            alignment: Alignment.center
-        ),
-        Container(
-          padding: EdgeInsets.all(5.0),
-          child: Stack(
-              children: [
-                RaisedButton(
-                  onPressed: (){
-                    allocationProvider.deleteHistory(); //toDo: Make sure it only deleted specific user data
-                  },
-                  child: Text("Delete Data"),
-                )
-              ]
-          ),
-          alignment: Alignment.bottomCenter,
-        )
-      ],
-    );
+              ),
+              body: Container(
+                width: 1000,
+                  height: 1000,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(padding: EdgeInsets.only(top: 15, left:20),
+                      child: Text("Change Email", style: TextStyle(color: Colors.blue, fontSize: 20,),),),
+                    Padding(
+                      padding: EdgeInsets.all(20),
+                      child: TextField(
+                        controller: emailController,
+                        decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 3.0),
+                        )),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top:5, left: 20, right: 20),
+                      child: FlatButton(
+                          shape:new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
+                          color: Colors.blue,
+                          height: 50,
+                          child: Text("SAVE EMAIL", style: TextStyle(color: Colors.white, fontSize: 15),),
+                          minWidth: 1000,
+                          onPressed: (){
+                            allocationProvider.setEmail(emailController.text);
+                          },
+                        ),
+                      ),
+                    Padding(
+                      padding: EdgeInsets.only(top:350, left: 20, right: 20),
+                      child: FlatButton(
+                        shape:new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
+                        color: Colors.blue,
+                        height: 50,
+                        child: Text("DELETE HISTORY", style: TextStyle(color: Colors.white, fontSize: 15),),
+                        minWidth: 1000,
+                        onPressed: (){
+                          allocationProvider.deleteHistory();
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            )
+        );
   }
 }
