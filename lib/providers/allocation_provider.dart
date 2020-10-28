@@ -12,18 +12,30 @@ class AllocationProvider with ChangeNotifier {
 
   AllocationProvider(){
     _state = new AllocationState();
+    state.strHistList = [];
+    state.allocHistList = [];
     notifyListeners();
   }
 
+
   AllocationState get state => _state;
 
-  void getHistory() async{
 
+  void getHistory() async{
+    state.loading = true;
+    final prefs = await SharedPreferences.getInstance();
+    state.strHistList = prefs.getStringList("testkey") != null ? prefs.getStringList("testkey"): [];
+    notifyListeners();
+    state.loading = false;
   }
 
   void saveHistory(int supplyNum, String userEmail, int numRec, String hashKey, String timeStamp, List<String> itemSelection) async{
     state.loading = true;
     state.allocHistList.add(new ResultModel(supply: supplyNum, email: userEmail, recipients: numRec, hashKey: "129301", timestamp: timeStamp, selection: itemSelection));
+    state.strHistList.add("$timeStamp" + "\n" + "${itemSelection.length.toString()}" + " ID's Selected");
+    prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("testkey", state.strHistList);
+    notifyListeners();
     state.loading = false;
   }
 
@@ -31,8 +43,7 @@ class AllocationProvider with ChangeNotifier {
     state.userEmail = email;
     notifyListeners();
   }
-
-  void deleteListItem(RecipientModel item){
+    void deleteListItem(RecipientModel item){
     state.loading = true;
     state.recipientList.remove(item);
     notifyListeners();
@@ -54,6 +65,7 @@ class AllocationProvider with ChangeNotifier {
     state.loading = true;
     state.allocHistList.clear();
     state.allocHistList = new List<ResultModel>();
+    state.strHistList.clear();
     notifyListeners();
     state.loading = false;
   }

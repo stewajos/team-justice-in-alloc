@@ -79,19 +79,19 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
           color: Colors.blueAccent,
           child: Column(
             children: [
-              SizedBox(height: 60.0,),
+              SizedBox(height: 40.0,),
               SideNavTile(
                 title: allocationProvider.state.userEmail,
                 icon: Icons.person,
                 aniController: _animationController,),
               Divider(
                 color:Colors.white,
-                height: 20.0,
+                height: 25.0,
                 thickness: 2.0,),
               Expanded(
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
-                    return Divider(color: Colors.blueAccent, height: 20.0);
+                    return Divider(color: Colors.blueAccent, height: 30.0);
                   },
                   itemBuilder: (context, index) {
                   return SideNavTile(
