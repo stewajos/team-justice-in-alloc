@@ -1,6 +1,7 @@
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list.dart';
 import 'package:allocation_app/model/recipient_model.dart';
 import 'package:allocation_app/providers/allocation_provider.dart';
+import 'package:allocation_app/services/hashing_service.dart';
 import 'package:provider/provider.dart';
 //import 'package:allocation_app/model/result_model.dart';
 import 'package:allocation_app/pages/report_page/report_page.dart';
@@ -20,6 +21,7 @@ class _AllocationPageState extends State<AllocationPage> {
   var recipientList = new List<String>();
   var supplyCount = 0;
   final db = new DatabaseService();
+  final hs = new HashingService();
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
     functionName: 'getSelection',
   );
@@ -72,15 +74,20 @@ class _AllocationPageState extends State<AllocationPage> {
                       List<RecipientModel> filteredRecipients =
                           filterRecipients(convertListToInt(temp),
                               allocationProvider.state.recipientList);
-
                       //send results to db
                       db.sendResult(
                           value.data["recipients"].toString(),
                           value.data["supply"].toString(),
                           value.data["timestamp"].toString(),
                           temp.toString(),
-                          "no hash for now");
-
+                          hs.hashJSON(
+                            hs.toJson("fake email://allocation_page:84ish",
+                              value.data["supply"],
+                              value.data["recipients"],
+                              value.data["timestamp"].toString(),
+                              temp)
+                            )
+                          );
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
