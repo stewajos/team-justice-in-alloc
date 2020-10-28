@@ -23,7 +23,7 @@ class AllocationProvider with ChangeNotifier {
 
   void getHistory() async{
     state.loading = true;
-    final prefs = await SharedPreferences.getInstance();
+    prefs = await SharedPreferences.getInstance();
     state.strHistList = prefs.getStringList("testkey") != null ? prefs.getStringList("testkey"): [];
     notifyListeners();
     state.loading = false;
@@ -66,6 +66,7 @@ class AllocationProvider with ChangeNotifier {
     state.allocHistList.clear();
     state.allocHistList = new List<ResultModel>();
     state.strHistList.clear();
+    prefs.remove("testkey"); //todo: Remove this when done testing - used should not be able to delete this data unless the app is uninstalled
     notifyListeners();
     state.loading = false;
   }
