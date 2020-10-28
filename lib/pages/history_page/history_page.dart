@@ -6,8 +6,8 @@ import 'package:provider/provider.dart';
 class HistoryPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-
     final allocationProvider = Provider.of<AllocationProvider>(context);
+    allocationProvider.getHistory();
 
     return Container(
         color: Colors.white70,
@@ -27,7 +27,6 @@ class HistoryPage extends StatelessWidget{
             height: 1000,
             child: HistoryList(
               histList: allocationProvider.state.strHistList != null ? allocationProvider.state.strHistList : [],
-              //ToDo: Add actual list of history loaded from device using email as key
             ),
           ),
         ),
