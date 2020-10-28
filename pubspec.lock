@@ -176,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  firebase_remote_config:
+    dependency: "direct main"
+    description:
+      name: firebase_remote_config
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.4.0+2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -226,6 +233,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3-nullsafety.1"
+  mail:
+    dependency: transitive
+    description:
+      name: mail
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
+  mailgun:
+    dependency: "direct main"
+    description:
+      name: mailgun
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   matcher:
     dependency: transitive
     description:

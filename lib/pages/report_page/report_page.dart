@@ -4,6 +4,7 @@ import 'package:allocation_app/model/recipient_model.dart';
 import 'package:allocation_app/pages/settings_page/widgets/settings_form.dart';
 import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/services/database.dart';
+import 'package:allocation_app/services/email_service.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -59,6 +60,7 @@ class ReportPageState extends State<ReportPage>{
   @override
   Widget build(BuildContext context) {
 
+    EmailService emailService = new EmailService();
     final allocationProvider = Provider.of<AllocationProvider>(context);
     allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
 
@@ -114,6 +116,7 @@ class ReportPageState extends State<ReportPage>{
               onPressed: (){
                 Navigator.pop(context);
                 Navigator.pop(context);
+                emailService.sendTestEmail();
               },
             ),
           ],
