@@ -9,6 +9,5 @@ class ResultModel {
   final List<String> selection;
 
   ResultModel({this.supply, this.email, this.recipients, this.hashKey, this.timestamp, this.selection});
-
 }
 
