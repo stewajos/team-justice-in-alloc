@@ -8,25 +8,26 @@ class HistoryPage extends StatelessWidget{
   Widget build(BuildContext context) {
 
     final allocationProvider = Provider.of<AllocationProvider>(context);
+    allocationProvider.getHistory();
 
     return Container(
         color: Colors.white70,
         child: Scaffold(
           backgroundColor: Colors.black12,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(80),
+            preferredSize: Size.fromHeight(70),
             child: AppBar(
               elevation: 3,
               centerTitle: true,
               leading: Container(),
-              title: Text("\n" + "Your History"), backgroundColor: Colors.blueAccent,
+              title: Text("Your History"), backgroundColor: Colors.blueAccent,
             ),
           ),
           body: Container(
             width: 1000,
             height: 1000,
             child: HistoryList(
-              histList: allocationProvider.state.strHistList != null ? allocationProvider.state.strHistList : [],
+              histList: allocationProvider.state.allocHistList,
               //ToDo: Add actual list of history loaded from device using email as key
             ),
           ),

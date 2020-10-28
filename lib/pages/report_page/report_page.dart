@@ -62,6 +62,7 @@ class ReportPageState extends State<ReportPage>{
 
     EmailService emailService = new EmailService();
     final allocationProvider = Provider.of<AllocationProvider>(context);
+    allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -113,7 +114,6 @@ class ReportPageState extends State<ReportPage>{
               color: Colors.blueAccent,
               child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
               onPressed: (){
-                allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
                 Navigator.pop(context);
                 Navigator.pop(context);
                 emailService.sendTestEmail();

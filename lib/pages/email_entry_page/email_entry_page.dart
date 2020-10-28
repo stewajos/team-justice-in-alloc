@@ -7,7 +7,6 @@ class EmailEntryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final allocationProvider = Provider.of<AllocationProvider>(context);
-    allocationProvider.getHistory();
 
     TextEditingController emailController = new TextEditingController();
     var emailInput;
