@@ -1,9 +1,10 @@
+import 'package:allocation_app/model/recipient_model.dart';
 import 'package:flutter/material.dart';
 
 class SelectionListItem extends StatelessWidget {
 
-  final String entry;
-  final List<String> itemList;
+  final RecipientModel entry;
+  final List<RecipientModel> itemList;
 
   SelectionListItem({
     Key key,
@@ -18,7 +19,7 @@ class SelectionListItem extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(5),
         child: ListTile(
-          title: Text(entry, style: TextStyle(fontSize: 15,),),
+          title: Text(entry.id, style: TextStyle(fontSize: 15,),),
         ),
       ),
     );

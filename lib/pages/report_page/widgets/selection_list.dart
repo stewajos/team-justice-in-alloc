@@ -1,10 +1,11 @@
 
+import 'package:allocation_app/model/recipient_model.dart';
 import 'package:allocation_app/pages/report_page/widgets/selection_list_item.dart';
 import 'package:flutter/material.dart';
 
 class SelectionList extends StatefulWidget {
 
-  final List<String> items;
+  final List<RecipientModel> items;
 
   SelectionList({
     @required this.items,

@@ -1,6 +1,7 @@
 import 'dart:isolate';
 
 import 'package:allocation_app/model/recipient_model.dart';
+import 'package:allocation_app/pages/report_page/widgets/selection_list.dart';
 import 'package:allocation_app/pages/settings_page/widgets/settings_form.dart';
 import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/services/database.dart';
@@ -104,10 +105,12 @@ class ReportPageState extends State<ReportPage>{
             Padding(
               padding: EdgeInsets.only(top: 20),
             ),
-            Text("Selection: $itemSelection",
-              style: TextStyle(color: Colors.blueAccent,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
+            Container(
+              width: 1000,
+              height: 300,
+              child: SelectionList(
+                items: selection,
+              ),
             ),
             Padding(
               padding: EdgeInsets.only(top:100),
