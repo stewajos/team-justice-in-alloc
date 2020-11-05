@@ -20,6 +20,7 @@ class AllocationPage extends StatefulWidget {
 class _AllocationPageState extends State<AllocationPage> {
   var recipientList = new List<String>();
   var supplyCount = 0;
+  final _formKey = GlobalKey<FormState>();
   final db = new DatabaseService();
   final hs = new HashingService();
   final HttpsCallable callable = CloudFunctions.instance.getHttpsCallable(
@@ -125,15 +126,21 @@ class _AllocationPageState extends State<AllocationPage> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: supplyCountController,
-                decoration: InputDecoration(
-                    labelText: "Enter Quantity",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 5.0),
-                    )),
-              ),
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  validator: (value) {
+
+                  },
+                  keyboardType: TextInputType.number,
+                  controller: supplyCountController,
+                  decoration: InputDecoration(
+                      labelText: "Enter Quantity",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 5.0),
+                      )),
+                ),
+              )
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             FlatButton(

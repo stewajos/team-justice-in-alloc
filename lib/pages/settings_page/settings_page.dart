@@ -17,6 +17,8 @@ class SettingsPage extends StatefulWidget{
 class SettingsPageState extends State<SettingsPage>{
   String userEmail;
   final _formKey = GlobalKey<FormState>();
+  DatabaseService db = new DatabaseService();
+  List<String> FAQjson = List<String>();
 
   SettingsPageState(
     {
@@ -28,6 +30,8 @@ class SettingsPageState extends State<SettingsPage>{
   Widget build(BuildContext context) {
     final allocationProvider = Provider.of<AllocationProvider>(context);
     final emailController = new TextEditingController();
+
+    db.getFAQResults();
 
     return Container(
             color: Colors.white,

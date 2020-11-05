@@ -11,6 +11,8 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('testing');
   final CollectionReference databaseCollection =
       FirebaseFirestore.instance.collection('database');
+  final CollectionReference FAQCollection =
+      FirebaseFirestore.instance.collection('FAQ');
 
   Future updateCount() async {
     return await testingCollection
@@ -27,4 +29,12 @@ class DatabaseService {
       "hash": hash
     });
   }
+
+  Future getFAQResults() async {
+    return await FAQCollection.get()
+        .then((QuerySnapshot qss) => {
+          qss.docs
+    });
+  }
+
 }
