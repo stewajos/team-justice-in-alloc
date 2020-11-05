@@ -7,7 +7,6 @@ class HistoryPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final allocationProvider = Provider.of<AllocationProvider>(context);
-    allocationProvider.getHistory();
 
     return Container(
         color: Colors.white70,
@@ -26,7 +25,7 @@ class HistoryPage extends StatelessWidget{
             width: 1000,
             height: 1000,
             child: HistoryList(
-              histList: allocationProvider.state.strHistList != null ? allocationProvider.state.strHistList : [],
+              histList: allocationProvider.state.allocHistList != null ? allocationProvider.state.allocHistList : [],
             ),
           ),
         ),

@@ -70,7 +70,8 @@ class ReportPageState extends State<ReportPage>{
 
     return WillPopScope(
       onWillPop: () {
-        allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
+        allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, hashCode.toString(), timestamp, itemSelection);
+        allocationProvider.resetData();
         Navigator.pop(context, false);
         Navigator.pop(context, false);
         //return a future
@@ -129,7 +130,7 @@ class ReportPageState extends State<ReportPage>{
                 child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
                 
                 onPressed: (){
-                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
+                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, hashCode.toString(), timestamp, itemSelection);
                   Navigator.pop(context);
                   Navigator.pop(context);
                   //emailService.sendTestEmail();

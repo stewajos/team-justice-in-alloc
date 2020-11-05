@@ -47,7 +47,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final allocationProvider = Provider.of<AllocationProvider>(context);
     return EmailEntryPage();
   }
 }
