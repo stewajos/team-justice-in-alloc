@@ -16,6 +16,7 @@ class SettingsPage extends StatefulWidget{
 
 class SettingsPageState extends State<SettingsPage>{
   String userEmail;
+  final _formKey = GlobalKey<FormState>();
 
   SettingsPageState(
     {
@@ -53,12 +54,26 @@ class SettingsPageState extends State<SettingsPage>{
                       child: Text("Change Email", style: TextStyle(color: Colors.blue, fontSize: 20,),),),
                     Padding(
                       padding: EdgeInsets.all(20),
-                      child: TextField(
-                        controller: emailController,
-                        decoration: InputDecoration(labelText: "Email", border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue, width: 3.0),
-                        )),
-                      ),
+                        child: Form(
+                            key: _formKey,
+                            child: TextFormField(
+                              autofocus: false,
+                              controller: emailController,
+                              validator: (value) {
+                                if(!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)){
+                                  return 'Invalid Email';
+                                }
+                                return null;
+                              },
+                              inputFormatters: [],
+                              decoration: InputDecoration(
+                                  labelText: "Email",
+                                  border: OutlineInputBorder(
+                                    borderSide: BorderSide(color: Colors.blue, width: 3.0),
+                                  )
+                              ),
+                            )
+                        )
                     ),
                     Padding(
                       padding: EdgeInsets.only(top:5, left: 20, right: 20),
@@ -69,7 +84,9 @@ class SettingsPageState extends State<SettingsPage>{
                           child: Text("SAVE EMAIL", style: TextStyle(color: Colors.white, fontSize: 15),),
                           minWidth: 1000,
                           onPressed: (){
-                            allocationProvider.setEmail(emailController.text);
+                            if(_formKey.currentState.validate()) {
+                              allocationProvider.setEmail(emailController.text);
+                            }
                           },
                         ),
                       ),
