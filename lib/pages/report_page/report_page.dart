@@ -68,74 +68,84 @@ class ReportPageState extends State<ReportPage>{
     final allocationProvider = Provider.of<AllocationProvider>(context);
     // final File pdf ;
 
-    return Scaffold(
-      resizeToAvoidBottomPadding: false,
-      appBar: AppBar(
-        leading: Container(),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+    return WillPopScope(
+      onWillPop: () {
+        allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
+        Navigator.pop(context, false);
+        Navigator.pop(context, false);
+        //return a future
+        return Future.value(false);
+      },
+      child: Scaffold(
+        resizeToAvoidBottomPadding: false,
+        appBar: AppBar(
+          leading: Container(),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+          ),
         ),
-      ),
-      body: Container(
-        padding: EdgeInsets.all(40),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Supply: $supply",
-              style: TextStyle(color: Colors.blueAccent,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-            ),
-            Text("Recipients: $recipients",
-              style: TextStyle(color: Colors.blueAccent,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-            ),
-            Text("Timestamp: $timestamp",
-              style: TextStyle(color: Colors.blueAccent,
-                fontSize: 20,
-                fontWeight: FontWeight.bold),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-            ),
-            Container(
-              width: 1000,
-              height: 300,
-              child: SelectionList(
-                items: selection,
+        body: Container(
+          padding: EdgeInsets.all(40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text("Supply: $supply",
+                style: TextStyle(color: Colors.blueAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top:100),
-            ),
-            FlatButton(
-              minWidth: 1000,
-              color: Colors.blueAccent,
-              child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
-              onPressed: (){
-                allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
-                Navigator.pop(context);
-                Navigator.pop(context);
-                //emailService.sendTestEmail();
-                //get directory for the pdf service
-                // File tmp;
-                pdfService.writeTestFile().then((value) =>
-                  emailService.sendResultEmail(allocationProvider.state.userEmail, value));
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              Text("Recipients: $recipients",
+                style: TextStyle(color: Colors.blueAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              Text("Timestamp: $timestamp",
+                style: TextStyle(color: Colors.blueAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+              ),
+              Container(
+                width: 1000,
+                height: 300,
+                child: SelectionList(
+                  items: selection,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top:100),
+              ),
+              FlatButton(
+                minWidth: 1000,
+                color: Colors.blueAccent,
+                child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
+                
+                onPressed: (){
+                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  //emailService.sendTestEmail();
+                  //get directory for the pdf service
+                  // File tmp;
+                  pdfService.writeTestFile().then((value) =>
+                    emailService.sendResultEmail(allocationProvider.state.userEmail, value));
 
-                // emailService.sendResultEmail(allocationProvider.state.userEmail, tmp);
+                  // emailService.sendResultEmail(allocationProvider.state.userEmail, tmp);
 
-                //TODO: Once we get the pdf service working properly, implement this line blow instead
-                //emailService.sendResultEmail(allocationProvider.state.userEmail, pdfService.resultToPdf(data));
-              },
-            ),
-          ],
+                  //TODO: Once we get the pdf service working properly, implement this line blow instead
+                  //emailService.sendResultEmail(allocationProvider.state.userEmail, pdfService.resultToPdf(data));
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

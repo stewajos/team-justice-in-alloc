@@ -88,6 +88,7 @@ class _AllocationPageState extends State<AllocationPage> {
                               temp)
                             )
                           );
+                      //Add calculated hashkey to the provider
                       allocationProvider.state.hashKey = hs.hashCode.toString();
                       Navigator.push(
                         context,
