@@ -7,7 +7,7 @@ class HistoryList extends StatefulWidget{
 
   _HistoryListState createState() => _HistoryListState();
 
-  final List<String> histList;
+  final List<ResultModel> histList;
 
   HistoryList({
    @required this.histList,

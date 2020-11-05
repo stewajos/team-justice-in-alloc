@@ -12,8 +12,8 @@ class AllocationProvider with ChangeNotifier {
 
   AllocationProvider() {
     _state = new AllocationState();
-    state.strHistList = [];
     state.allocHistList = [];
+    state.strHistList = [];
     notifyListeners();
   }
 
@@ -21,19 +21,29 @@ class AllocationProvider with ChangeNotifier {
 
   void getHistory() async{
     state.loading = true;
-    prefs = await SharedPreferences.getInstance();
-    state.strHistList = prefs.getStringList("testkey") != null ? prefs.getStringList("testkey"): [];
-    notifyListeners();
+    try{
+      prefs = await SharedPreferences.getInstance();
+      state.strHistList = prefs.getStringList("testKey") != null ? prefs.getStringList("testKey") : [];
+      print(state.strHistList.length);
+      state.strHistList.forEach((element) {
+        if(!state.allocHistList.contains(ResultModel.fromJson(json.decode(element)))){
+          state.allocHistList.add(ResultModel.fromJson(json.decode(element)));
+        }
+      });
+    }
+    catch (Exception){
+      print("something went wrong with the history");
+    }
     state.loading = false;
   }
 
   void saveHistory(int supplyNum, String userEmail, int numRec, String hashKey, String timeStamp, List<String> itemSelection) async{
     state.loading = true;
-    state.allocHistList.add(new ResultModel(supply: supplyNum, email: userEmail, recipients: numRec, hashKey: "129301", timestamp: timeStamp, selection: itemSelection));
-    state.strHistList.add("$timeStamp" + "\n" + "${itemSelection.length.toString()}" + " ID's Selected");
+    ResultModel histItem = new ResultModel(supply: supplyNum, email: userEmail, recipients: numRec, hashKey: hashKey, timestamp: timeStamp, selection: itemSelection);
+    state.allocHistList.add(histItem);
     prefs = await SharedPreferences.getInstance();
-    prefs.setStringList("testkey", state.strHistList);
-    notifyListeners();
+    state.strHistList.add(json.encode(histItem));
+    prefs.setStringList("testKey", state.strHistList);
     state.loading = false;
   }
 
@@ -64,7 +74,7 @@ class AllocationProvider with ChangeNotifier {
     state.allocHistList.clear();
     state.allocHistList = new List<ResultModel>();
     state.strHistList.clear();
-    prefs.remove("testkey"); //todo: Remove this when done testing - used should not be able to delete this data unless the app is uninstalled
+    prefs.remove("testKey"); //todo: Remove this when done testing - used should not be able to delete this data unless the app is uninstalled
     notifyListeners();
     state.loading = false;
   }
@@ -72,6 +82,14 @@ class AllocationProvider with ChangeNotifier {
   void resetList(){
     state.recipientList.clear();
     state.recipientList = new List<RecipientModel>();
+    notifyListeners();
+  }
+
+  void resetData(){
+    state.recipientList.clear();
+    state.hashKey = "";
+    state.loading = false;
+    state.hasError = false;
     notifyListeners();
   }
 }

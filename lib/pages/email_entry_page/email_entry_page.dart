@@ -14,6 +14,7 @@ class EmailEntryPageState extends State<EmailEntryPage> {
 
   final _formKey = GlobalKey<FormState>();
 
+
   @override
   Widget build(BuildContext context) {
     final allocationProvider = Provider.of<AllocationProvider>(context);
@@ -22,6 +23,7 @@ class EmailEntryPageState extends State<EmailEntryPage> {
     var emailInput;
 
     return Scaffold(
+
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -72,6 +74,7 @@ class EmailEntryPageState extends State<EmailEntryPage> {
               onPressed:(){
                 if(_formKey.currentState.validate()) {
                   allocationProvider.state.userEmail = emailController.text;
+                  allocationProvider.getHistory();
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
