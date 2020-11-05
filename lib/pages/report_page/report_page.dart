@@ -5,9 +5,11 @@ import 'package:allocation_app/pages/settings_page/widgets/settings_form.dart';
 import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:allocation_app/services/database.dart';
 import 'package:allocation_app/services/email_service.dart';
+import 'package:allocation_app/services/pdf_service.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 
 class ReportPage extends StatefulWidget {
   int supply;
@@ -61,7 +63,9 @@ class ReportPageState extends State<ReportPage>{
   Widget build(BuildContext context) {
 
     EmailService emailService = new EmailService();
+    PdfService pdfService = new PdfService();
     final allocationProvider = Provider.of<AllocationProvider>(context);
+    // final File pdf ;
 
     return Scaffold(
       resizeToAvoidBottomPadding: false,
@@ -116,7 +120,16 @@ class ReportPageState extends State<ReportPage>{
                 allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, "234235", timestamp, itemSelection);
                 Navigator.pop(context);
                 Navigator.pop(context);
-                emailService.sendTestEmail();
+                //emailService.sendTestEmail();
+                //get directory for the pdf service
+                // File tmp;
+                pdfService.writeTestFile().then((value) =>
+                  emailService.sendResultEmail(allocationProvider.state.userEmail, value));
+
+                // emailService.sendResultEmail(allocationProvider.state.userEmail, tmp);
+
+                //TODO: Once we get the pdf service working properly, implement this line blow instead
+                //emailService.sendResultEmail(allocationProvider.state.userEmail, pdfService.resultToPdf(data));
               },
             ),
           ],

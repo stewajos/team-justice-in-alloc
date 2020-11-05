@@ -25,6 +25,7 @@ dependencies:
   cloud_firestore_web: ^0.2.0+4
   cloud_functions: ^0.6.0+1
   provider: ^4.3.2+2
+  path_provider: ^1.6.24
   shared_preferences: ^0.5.12+2
   crypto: ^2.1.5
   mailgun: ^0.1.0
