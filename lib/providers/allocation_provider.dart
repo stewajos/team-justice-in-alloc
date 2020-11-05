@@ -10,16 +10,14 @@ class AllocationProvider with ChangeNotifier {
   AllocationState _state;
   SharedPreferences prefs;
 
-  AllocationProvider(){
+  AllocationProvider() {
     _state = new AllocationState();
     state.strHistList = [];
     state.allocHistList = [];
     notifyListeners();
   }
 
-
   AllocationState get state => _state;
-
 
   void getHistory() async{
     state.loading = true;

@@ -22,8 +22,13 @@ class HistoryListItem extends StatelessWidget{
       child: Padding(
         padding: EdgeInsets.all(10),
         child: ListTile(
-          title: Text(listItem, style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),),
-          subtitle: Text("Ran by: " + allocationProvider.state.savedEmail == "" ? "No Email Provided" : allocationProvider.state.savedEmail + "Hash Key: "),
+          title: Text(listItem, style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold
+          ),),
+          subtitle: Text("Ran by: " + allocationProvider.state.savedEmail
+              == "" ? "No Email Provided" : allocationProvider.state.savedEmail
+              + "Hash Key: " + allocationProvider.state.hashKey),
         ),
       ),
     );

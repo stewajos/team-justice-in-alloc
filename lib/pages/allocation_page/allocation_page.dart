@@ -88,6 +88,7 @@ class _AllocationPageState extends State<AllocationPage> {
                               temp)
                             )
                           );
+                      allocationProvider.state.hashKey = hs.hashCode.toString();
                       Navigator.push(
                         context,
                         MaterialPageRoute(builder: (context) {
