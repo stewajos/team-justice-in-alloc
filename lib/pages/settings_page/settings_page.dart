@@ -28,6 +28,9 @@ class SettingsPageState extends State<SettingsPage>{
   Widget build(BuildContext context) {
     final allocationProvider = Provider.of<AllocationProvider>(context);
     final emailController = new TextEditingController();
+    final databaseService = new DatabaseService();
+
+    var data = databaseService.getFAQ().then((value) => print(value));
 
     return Container(
             color: Colors.white,

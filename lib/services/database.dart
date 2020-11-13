@@ -11,11 +11,18 @@ class DatabaseService {
       FirebaseFirestore.instance.collection('testing');
   final CollectionReference databaseCollection =
       FirebaseFirestore.instance.collection('database');
+  final CollectionReference faqCollection =
+      FirebaseFirestore.instance.collection('FAQ');
 
   Future updateCount() async {
     return await testingCollection
         .doc("target")
         .update({"count": FieldValue.increment(1)});
+  }
+
+  Future getFAQ() async {
+    var snapshot = await faqCollection.get();
+    return snapshot.docs.map((doc) => doc.data());
   }
 
   Future sendResult(recipients, supply, timestamp, selection, hash) async {
@@ -28,3 +35,5 @@ class DatabaseService {
     });
   }
 }
+
+
