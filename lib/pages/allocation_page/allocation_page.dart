@@ -143,6 +143,9 @@ class _AllocationPageState extends State<AllocationPage> {
                       print("We tried to validate the supply form");
                       return 'Please enter a number';
                     }
+                    else if( int.parse(value) > allocationProvider.state.recipientList.length){
+                      return 'There is more supply than recipients';
+                    }
                     return null;
                   },
                 ),
