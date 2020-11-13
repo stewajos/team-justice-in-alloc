@@ -18,6 +18,7 @@ class AllocationPage extends StatefulWidget {
 }
 
 class _AllocationPageState extends State<AllocationPage> {
+  final _formKey = GlobalKey<FormState>();
   var recipientList = new List<String>();
   var supplyCount = 0;
   final db = new DatabaseService();
@@ -49,6 +50,7 @@ class _AllocationPageState extends State<AllocationPage> {
     TextEditingController autoGenController = new TextEditingController();
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
@@ -57,50 +59,53 @@ class _AllocationPageState extends State<AllocationPage> {
           children: [
             FlatButton(
                 onPressed: () {
-                  callable.call(
-                    <String, dynamic>{
-                      "recipients":
-                          allocationProvider.state.recipientList.length - 1,
-                      "supply": int.parse(supplyCountController.text)
-                    },
-                  ).then((value) {
-                    if (value.data != 'invalid data') {
-                      List<dynamic> temp = value.data["selection"];
-                      List<RecipientModel> filteredRecipients =
-                          filterRecipients(convertListToInt(temp),
-                              allocationProvider.state.recipientList);
-                      //send results to db
-                      db.sendResult(
-                          value.data["recipients"].toString(),
-                          value.data["supply"].toString(),
-                          value.data["timestamp"].toString(),
-                          temp.toString(),
-                          hs.hashJSON(
-                            hs.toJson("fake email://allocation_page:84ish",
-                              value.data["supply"],
-                              value.data["recipients"],
-                              value.data["timestamp"].toString(),
-                              temp)
+                  if (_formKey.currentState.validate()) {
+                    callable.call(
+                      <String, dynamic>{
+                        "recipients":
+                        allocationProvider.state.recipientList.length - 1,
+                        "supply": int.parse(supplyCountController.text)
+                      },
+                    ).then((value) {
+                      if (value.data != 'invalid data') {
+                        List<dynamic> temp = value.data["selection"];
+                        List<RecipientModel> filteredRecipients =
+                        filterRecipients(convertListToInt(temp),
+                            allocationProvider.state.recipientList);
+                        //send results to db
+                        db.sendResult(
+                            value.data["recipients"].toString(),
+                            value.data["supply"].toString(),
+                            value.data["timestamp"].toString(),
+                            temp.toString(),
+                            hs.hashJSON(
+                                hs.toJson("fake email://allocation_page:84ish",
+                                    value.data["supply"],
+                                    value.data["recipients"],
+                                    value.data["timestamp"].toString(),
+                                    temp)
                             )
-                          );
-                      //Add calculated hashkey to the provider
-                      allocationProvider.state.hashKey = hs.hashCode.toString();
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return ReportPage(
-                            recipients: value.data["recipients"] + 1,
-                            supply: value.data["supply"],
-                            timestamp: value.data["timestamp"],
-                            selection: filteredRecipients,
-                          );
-                        }),
-                      );
-                    }
-                    else{
-                      print("Invalid Data");
-                    }
-                  });
+                        );
+                        //Add calculated hashkey to the provider
+                        allocationProvider.state.hashKey =
+                            hs.hashCode.toString();
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) {
+                            return ReportPage(
+                              recipients: value.data["recipients"] + 1,
+                              supply: value.data["supply"],
+                              timestamp: value.data["timestamp"],
+                              selection: filteredRecipients,
+                            );
+                          }),
+                        );
+                      }
+                      else {
+                        print("Invalid Data");
+                      }
+                    });
+                  }
                 },
                 child: Text(
                   "SUBMIT",
@@ -123,15 +128,25 @@ class _AllocationPageState extends State<AllocationPage> {
             ),
             Padding(
               padding: EdgeInsets.only(top: 20),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: supplyCountController,
-                decoration: InputDecoration(
-                    labelText: "Enter Quantity",
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue, width: 5.0),
-                    )),
-              ),
+              child: Form(
+                key: _formKey,
+                child: TextFormField(
+                  keyboardType: TextInputType.number,
+                  controller: supplyCountController,
+                  decoration: InputDecoration(
+                      labelText: "Enter Quantity",
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.blue, width: 5.0),
+                      )),
+                  validator: (value) {
+                    if(!RegExp(r'^[0-9]+$').hasMatch(value)){
+                      print("We tried to validate the supply form");
+                      return 'Please enter a number';
+                    }
+                    return null;
+                  },
+                ),
+              )
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             FlatButton(
@@ -155,7 +170,7 @@ class _AllocationPageState extends State<AllocationPage> {
                             Padding(
                               padding: EdgeInsets.only(top: 10),
                             ),
-                            TextField(
+                            TextFormField(
                               keyboardType: TextInputType.text,
                               controller: nameInputController,
                               inputFormatters: [],
