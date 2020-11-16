@@ -66,6 +66,7 @@ class EmailEntryPageState extends State<EmailEntryPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlatButton(
+              minWidth: 300,
               onPressed:(){
                 if(_formKey.currentState.validate()) {
                   allocationProvider.state.userEmail = emailController.text;
