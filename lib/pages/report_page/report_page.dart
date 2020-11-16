@@ -28,7 +28,7 @@ class ReportPage extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() {
+  State<StatefulWidget> createState() {;
     return new ReportPageState(
       supply: supply,
       recipients: recipients,
@@ -72,7 +72,7 @@ class ReportPageState extends State<ReportPage>{
 
     return WillPopScope(
       onWillPop: () {
-        allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, hashCode.toString(), timestamp, itemSelection);
+        allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, allocationProvider.state.hashKey, timestamp, itemSelection);
         allocationProvider.resetData();
         Navigator.pop(context, false);
         Navigator.pop(context, false);

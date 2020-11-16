@@ -47,15 +47,27 @@ class _AllocationPageState extends State<AllocationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextEditingController nameInputController = new TextEditingController();
     TextEditingController autoGenController = new TextEditingController();
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_sharp, color: Colors.white,),
+          onPressed: (){
+            supplyCountController.clear();
+            allocationProvider.resetList();
+            Navigator.pop(context);
+          },
+        ),
         backgroundColor: primaryColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -75,6 +87,7 @@ class _AllocationPageState extends State<AllocationPage> {
                         List<RecipientModel> filteredRecipients =
                         filterRecipients(convertListToInt(temp),
                             allocationProvider.state.recipientList);
+                        allocationProvider.state.hashKey = value.data["timestamp"].toString();
                         //send results to db
                         db.sendResult(
                             value.data["recipients"].toString(),
@@ -103,6 +116,8 @@ class _AllocationPageState extends State<AllocationPage> {
                             );
                           }),
                         );
+                        supplyCountController.clear();
+                        allocationProvider.resetList();
                       }
                       else {
                         print("Invalid Data");
