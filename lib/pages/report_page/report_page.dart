@@ -12,6 +12,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 
+import '../../theme.dart';
+
 class ReportPage extends StatefulWidget {
   int supply;
   int recipients;
@@ -80,6 +82,7 @@ class ReportPageState extends State<ReportPage>{
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
+          backgroundColor: primaryColor,
           leading: Container(),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -91,7 +94,7 @@ class ReportPageState extends State<ReportPage>{
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text("Supply: $supply",
-                style: TextStyle(color: Colors.blueAccent,
+                style: TextStyle(color: primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
               ),
@@ -99,7 +102,7 @@ class ReportPageState extends State<ReportPage>{
                 padding: EdgeInsets.only(top: 20),
               ),
               Text("Recipients: $recipients",
-                style: TextStyle(color: Colors.blueAccent,
+                style: TextStyle(color: primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
               ),
@@ -107,26 +110,22 @@ class ReportPageState extends State<ReportPage>{
                 padding: EdgeInsets.only(top: 20),
               ),
               Text("Timestamp: $timestamp",
-                style: TextStyle(color: Colors.blueAccent,
+                style: TextStyle(color: primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 20),
               ),
-              Container(
-                width: 1000,
-                height: 300,
+              Expanded(
                 child: SelectionList(
                   items: selection,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(top:100),
-              ),
               FlatButton(
                 minWidth: 1000,
-                color: Colors.blueAccent,
+                color: primaryColor,
+                height: 40,
                 child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
                 
                 onPressed: (){

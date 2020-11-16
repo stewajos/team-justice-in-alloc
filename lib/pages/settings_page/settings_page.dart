@@ -4,6 +4,8 @@ import 'package:allocation_app/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../theme.dart';
+
 class SettingsPage extends StatefulWidget{
   String email;
   SettingsPage({this.email});
@@ -43,7 +45,7 @@ class SettingsPageState extends State<SettingsPage>{
                   centerTitle: true,
                   leading: Container(),
                   title: Text("\n" + "Settings"),
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: primaryColor,
                 ),
               ),
               body: Container(
@@ -54,7 +56,7 @@ class SettingsPageState extends State<SettingsPage>{
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(padding: EdgeInsets.only(top: 15, left:20),
-                      child: Text("Change Email", style: TextStyle(color: Colors.blue, fontSize: 20,),),),
+                      child: Text("Change Email", style: TextStyle(color: primaryColor, fontSize: 20,),),),
                     Padding(
                       padding: EdgeInsets.all(20),
                         child: Form(
@@ -82,7 +84,7 @@ class SettingsPageState extends State<SettingsPage>{
                       padding: EdgeInsets.only(top:5, left: 20, right: 20),
                       child: FlatButton(
                           shape:new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
-                          color: Colors.blue,
+                          color: primaryColor,
                           height: 50,
                           child: Text("SAVE EMAIL", style: TextStyle(color: Colors.white, fontSize: 15),),
                           minWidth: 1000,
@@ -97,7 +99,7 @@ class SettingsPageState extends State<SettingsPage>{
                       padding: EdgeInsets.only(top:350, left: 20, right: 20),
                       child: FlatButton(
                         shape:new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
-                        color: Colors.blue,
+                        color: primaryColor,
                         height: 50,
                         child: Text("DELETE HISTORY", style: TextStyle(color: Colors.white, fontSize: 15),),
                         minWidth: 1000,

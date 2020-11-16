@@ -3,6 +3,8 @@ import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../theme.dart';
+
 class HistoryPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class HistoryPage extends StatelessWidget{
               elevation: 3,
               centerTitle: true,
               leading: Container(),
-              title: Text("\n" + "Your History"), backgroundColor: Colors.blueAccent,
+              title: Text("\n" + "Your History"), backgroundColor: primaryColor,
             ),
           ),
           body: Container(
