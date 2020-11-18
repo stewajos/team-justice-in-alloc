@@ -1,4 +1,5 @@
 import 'package:allocation_app/providers/allocation_provider.dart';
+import 'package:allocation_app/theme.dart';
 import 'package:allocation_app/widgets/navigation_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -29,7 +30,7 @@ class EmailEntryPageState extends State<EmailEntryPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(padding: EdgeInsets.only(top: 200),
-              child: Text("Enter your email to get started", style: TextStyle(color: Colors.blue, fontSize: 20),),),
+              child: Text("Enter your email to get started", style: TextStyle(color: primaryColor, fontSize: 20),),),
             Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(left: 70, right: 70, top: 20),
@@ -60,17 +61,12 @@ class EmailEntryPageState extends State<EmailEntryPage> {
         ),
       ),
       bottomNavigationBar: BottomAppBar(
-        color: Colors.blue,
+        color: primaryColor,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlatButton(
-              onPressed: null,
-              padding: EdgeInsets.all(30),
-              child: Text("BACK", style: TextStyle(color: Colors.white, fontSize: 15),),
-            ),
-            Padding(padding: EdgeInsets.only(left: 80, right: 80)),
-            FlatButton(
+              minWidth: 300,
               onPressed:(){
                 if(_formKey.currentState.validate()) {
                   allocationProvider.state.userEmail = emailController.text;

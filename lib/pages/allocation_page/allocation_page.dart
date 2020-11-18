@@ -10,6 +10,8 @@ import 'package:allocation_app/services/database.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../theme.dart';
+
 final TextEditingController supplyCountController = new TextEditingController();
 
 class AllocationPage extends StatefulWidget {
@@ -45,15 +47,28 @@ class _AllocationPageState extends State<AllocationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextEditingController nameInputController = new TextEditingController();
     TextEditingController autoGenController = new TextEditingController();
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
-
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_sharp, color: Colors.white,),
+          onPressed: (){
+            supplyCountController.clear();
+            allocationProvider.resetList();
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: primaryColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -72,6 +87,7 @@ class _AllocationPageState extends State<AllocationPage> {
                         List<RecipientModel> filteredRecipients =
                         filterRecipients(convertListToInt(temp),
                             allocationProvider.state.recipientList);
+                        allocationProvider.state.hashKey = value.data["timestamp"].toString();
                         //send results to db
                         db.sendResult(
                             value.data["recipients"].toString(),
@@ -100,6 +116,8 @@ class _AllocationPageState extends State<AllocationPage> {
                             );
                           }),
                         );
+                        supplyCountController.clear();
+                        allocationProvider.resetList();
                       }
                       else {
                         print("Invalid Data");
@@ -122,7 +140,7 @@ class _AllocationPageState extends State<AllocationPage> {
             Text(
               "Amount of Supply",
               style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
@@ -168,7 +186,7 @@ class _AllocationPageState extends State<AllocationPage> {
                             Text(
                               "Recipient Name",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.blueAccent),
+                                  fontSize: 20, color: primaryColor),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 10),
@@ -212,7 +230,7 @@ class _AllocationPageState extends State<AllocationPage> {
               },
               child:
                   Text("ADD RECIPIENT", style: TextStyle(color: Colors.white)),
-              color: Colors.blueAccent,
+              color: primaryColor,
             ),
             FlatButton(
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
@@ -288,12 +306,12 @@ class _AllocationPageState extends State<AllocationPage> {
               },
               child:
                   Text("AUTO GENERATE", style: TextStyle(color: Colors.white)),
-              color: Colors.blueAccent,
+              color: primaryColor,
             ),
             FlatButton(
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
               minWidth: 1000,
-              color: Colors.blueAccent,
+              color: primaryColor,
               child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
               onPressed: () {
                 setState(() {

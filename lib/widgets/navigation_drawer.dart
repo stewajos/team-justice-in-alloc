@@ -5,6 +5,7 @@ import 'package:allocation_app/pages/history_page/history_page.dart';
 import 'package:allocation_app/pages/home_page/home_page.dart';
 import 'package:allocation_app/pages/settings_page/settings_page.dart';
 import 'package:allocation_app/providers/allocation_provider.dart';
+import 'package:allocation_app/theme.dart';
 import 'package:allocation_app/widgets/side_nav_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +77,7 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
       elevation: 8.0,
       child: Container(
           width: widthAnimation.value,
-          color: Colors.blueAccent,
+          color: primaryColor,
           child: Column(
             children: [
               SizedBox(height: 40.0,),
