@@ -57,7 +57,8 @@ class _AllocationPageState extends State<AllocationPage> {
     TextEditingController autoGenController = new TextEditingController();
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
-    return Scaffold(
+    return GestureDetector(
+      child:  Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         leading: IconButton(
@@ -87,7 +88,6 @@ class _AllocationPageState extends State<AllocationPage> {
                         List<RecipientModel> filteredRecipients =
                         filterRecipients(convertListToInt(temp),
                             allocationProvider.state.recipientList);
-                        allocationProvider.state.hashKey = value.data["timestamp"].toString();
                         //send results to db
                         db.sendResult(
                             value.data["recipients"].toString(),
@@ -104,7 +104,7 @@ class _AllocationPageState extends State<AllocationPage> {
                         );
                         //Add calculated hashkey to the provider
                         allocationProvider.state.hashKey =
-                            hs.hashCode.toString();
+                            db.hashCode.toString();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
@@ -145,29 +145,29 @@ class _AllocationPageState extends State<AllocationPage> {
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Form(
-                key: _formKey,
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: supplyCountController,
-                  decoration: InputDecoration(
-                      labelText: "Enter Quantity",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 5.0),
-                      )),
-                  validator: (value) {
-                    if(!RegExp(r'^[0-9]+$').hasMatch(value)){
-                      print("We tried to validate the supply form");
-                      return 'Please enter a number';
-                    }
-                    else if( int.parse(value) > allocationProvider.state.recipientList.length){
-                      return 'There is more supply than recipients';
-                    }
-                    return null;
-                  },
-                ),
-              )
+                padding: EdgeInsets.only(top: 20),
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: supplyCountController,
+                    decoration: InputDecoration(
+                        labelText: "Enter Quantity",
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 5.0),
+                        )),
+                    validator: (value) {
+                      if(!RegExp(r'^[0-9]+$').hasMatch(value)){
+                        print("We tried to validate the supply form");
+                        return 'Please enter a number';
+                      }
+                      else if( int.parse(value) > allocationProvider.state.recipientList.length){
+                        return 'There is more supply than recipients';
+                      }
+                      return null;
+                    },
+                  ),
+                )
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             FlatButton(
@@ -229,7 +229,7 @@ class _AllocationPageState extends State<AllocationPage> {
                     });
               },
               child:
-                  Text("ADD RECIPIENT", style: TextStyle(color: Colors.white)),
+              Text("ADD RECIPIENT", style: TextStyle(color: Colors.white)),
               color: primaryColor,
             ),
             FlatButton(
@@ -274,18 +274,18 @@ class _AllocationPageState extends State<AllocationPage> {
                                     }),
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(left: 100, right: 60),
+                                  EdgeInsets.only(left: 100, right: 60),
                                 ),
                                 IconButton(
                                     icon: Icon(Icons.check),
                                     onPressed: () {
                                       if (allocationProvider
-                                              .state.recipientList.length >
+                                          .state.recipientList.length >
                                           0) {
                                         allocationProvider.resetList();
                                       }
                                       var genCount =
-                                          int.parse(autoGenController.text);
+                                      int.parse(autoGenController.text);
                                       for (var i = 0; i < genCount; i++) {
                                         setState(() {
                                           allocationProvider.addListItem(
@@ -305,7 +305,7 @@ class _AllocationPageState extends State<AllocationPage> {
                     });
               },
               child:
-                  Text("AUTO GENERATE", style: TextStyle(color: Colors.white)),
+              Text("AUTO GENERATE", style: TextStyle(color: Colors.white)),
               color: primaryColor,
             ),
             FlatButton(
@@ -332,11 +332,11 @@ class _AllocationPageState extends State<AllocationPage> {
                 "Number of entries: " +
                     (allocationProvider.state.recipientList.length > 0
                         ? (allocationProvider.state.recipientList.length)
-                            .toString()
+                        .toString()
                         : "0"),
                 style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400
 
                 ),
               ),
@@ -344,6 +344,11 @@ class _AllocationPageState extends State<AllocationPage> {
           ],
         ),
       ),
+    ),
+      onTap: (){
+        //Close the keyboard when tapping outside of the text box
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
     );
   }
 }

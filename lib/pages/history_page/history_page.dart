@@ -17,7 +17,7 @@ class HistoryPage extends StatelessWidget{
           appBar: PreferredSize(
             preferredSize: Size.fromHeight(80),
             child: AppBar(
-              elevation: 3,
+              elevation: 4,
               centerTitle: true,
               leading: Container(),
               title: Text("\n" + "Your History"), backgroundColor: primaryColor,
