@@ -295,6 +295,7 @@ class _AllocationPageState extends State<AllocationPage> {
                                                       "Recipient"));
                                         });
                                       }
+
                                       Navigator.pop(context);
                                     })
                               ],
