@@ -10,6 +10,8 @@ import 'package:allocation_app/services/database.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../theme.dart';
+
 final TextEditingController supplyCountController = new TextEditingController();
 
 class AllocationPage extends StatefulWidget {
@@ -45,15 +47,29 @@ class _AllocationPageState extends State<AllocationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     TextEditingController nameInputController = new TextEditingController();
     TextEditingController autoGenController = new TextEditingController();
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
-
-    return Scaffold(
+    return GestureDetector(
+      child:  Scaffold(
       resizeToAvoidBottomPadding: false,
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_sharp, color: Colors.white,),
+          onPressed: (){
+            supplyCountController.clear();
+            allocationProvider.resetList();
+            Navigator.pop(context);
+          },
+        ),
+        backgroundColor: primaryColor,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -88,7 +104,7 @@ class _AllocationPageState extends State<AllocationPage> {
                         );
                         //Add calculated hashkey to the provider
                         allocationProvider.state.hashKey =
-                            hs.hashCode.toString();
+                            db.hashCode.toString();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
@@ -100,6 +116,8 @@ class _AllocationPageState extends State<AllocationPage> {
                             );
                           }),
                         );
+                        supplyCountController.clear();
+                        allocationProvider.resetList();
                       }
                       else {
                         print("Invalid Data");
@@ -122,34 +140,34 @@ class _AllocationPageState extends State<AllocationPage> {
             Text(
               "Amount of Supply",
               style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: primaryColor,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
             ),
             Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Form(
-                key: _formKey,
-                child: TextFormField(
-                  keyboardType: TextInputType.number,
-                  controller: supplyCountController,
-                  decoration: InputDecoration(
-                      labelText: "Enter Quantity",
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blue, width: 5.0),
-                      )),
-                  validator: (value) {
-                    if(!RegExp(r'^[0-9]+$').hasMatch(value)){
-                      print("We tried to validate the supply form");
-                      return 'Please enter a number';
-                    }
-                    else if( int.parse(value) > allocationProvider.state.recipientList.length){
-                      return 'There is more supply than recipients';
-                    }
-                    return null;
-                  },
-                ),
-              )
+                padding: EdgeInsets.only(top: 20),
+                child: Form(
+                  key: _formKey,
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    controller: supplyCountController,
+                    decoration: InputDecoration(
+                        labelText: "Enter Quantity",
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue, width: 5.0),
+                        )),
+                    validator: (value) {
+                      if(!RegExp(r'^[0-9]+$').hasMatch(value)){
+                        print("We tried to validate the supply form");
+                        return 'Please enter a number';
+                      }
+                      else if( int.parse(value) > allocationProvider.state.recipientList.length){
+                        return 'There is more supply than recipients';
+                      }
+                      return null;
+                    },
+                  ),
+                )
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
             FlatButton(
@@ -168,7 +186,7 @@ class _AllocationPageState extends State<AllocationPage> {
                             Text(
                               "Recipient Name",
                               style: TextStyle(
-                                  fontSize: 20, color: Colors.blueAccent),
+                                  fontSize: 20, color: primaryColor),
                             ),
                             Padding(
                               padding: EdgeInsets.only(top: 10),
@@ -211,8 +229,8 @@ class _AllocationPageState extends State<AllocationPage> {
                     });
               },
               child:
-                  Text("ADD RECIPIENT", style: TextStyle(color: Colors.white)),
-              color: Colors.blueAccent,
+              Text("ADD RECIPIENT", style: TextStyle(color: Colors.white)),
+              color: primaryColor,
             ),
             FlatButton(
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
@@ -256,18 +274,18 @@ class _AllocationPageState extends State<AllocationPage> {
                                     }),
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(left: 100, right: 60),
+                                  EdgeInsets.only(left: 100, right: 60),
                                 ),
                                 IconButton(
                                     icon: Icon(Icons.check),
                                     onPressed: () {
                                       if (allocationProvider
-                                              .state.recipientList.length >
+                                          .state.recipientList.length >
                                           0) {
                                         allocationProvider.resetList();
                                       }
                                       var genCount =
-                                          int.parse(autoGenController.text);
+                                      int.parse(autoGenController.text);
                                       for (var i = 0; i < genCount; i++) {
                                         setState(() {
                                           allocationProvider.addListItem(
@@ -277,6 +295,7 @@ class _AllocationPageState extends State<AllocationPage> {
                                                       "Recipient"));
                                         });
                                       }
+
                                       Navigator.pop(context);
                                     })
                               ],
@@ -287,13 +306,13 @@ class _AllocationPageState extends State<AllocationPage> {
                     });
               },
               child:
-                  Text("AUTO GENERATE", style: TextStyle(color: Colors.white)),
-              color: Colors.blueAccent,
+              Text("AUTO GENERATE", style: TextStyle(color: Colors.white)),
+              color: primaryColor,
             ),
             FlatButton(
               shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(10.0)),
               minWidth: 1000,
-              color: Colors.blueAccent,
+              color: primaryColor,
               child: Text("CLEAR LIST", style: TextStyle(color: Colors.white)),
               onPressed: () {
                 setState(() {
@@ -314,11 +333,11 @@ class _AllocationPageState extends State<AllocationPage> {
                 "Number of entries: " +
                     (allocationProvider.state.recipientList.length > 0
                         ? (allocationProvider.state.recipientList.length)
-                            .toString()
+                        .toString()
                         : "0"),
                 style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w400
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400
 
                 ),
               ),
@@ -326,6 +345,11 @@ class _AllocationPageState extends State<AllocationPage> {
           ],
         ),
       ),
+    ),
+      onTap: (){
+        //Close the keyboard when tapping outside of the text box
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
     );
   }
 }

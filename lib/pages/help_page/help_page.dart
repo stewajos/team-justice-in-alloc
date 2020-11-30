@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:allocation_app/pages/allocation_page/widgets/allocation_list.dart';
 import 'package:allocation_app/model/recipient_model.dart';
@@ -10,6 +11,8 @@ import 'package:allocation_app/services/database.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/material.dart';
 
+import '../../theme.dart';
+
 class HelpPage extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
@@ -19,28 +22,29 @@ class HelpPage extends StatelessWidget{
 
 
     return Scaffold(
-     appBar: AppBar(
-        title: Row(
-          children: [
-            Text("Help",
-                style: TextStyle(fontSize: 20 ),
-                textAlign: TextAlign.center)
-          ],
-     ),
-       centerTitle: true,
-      ),
+     appBar: PreferredSize(
+       preferredSize: Size.fromHeight(80),
+       child: AppBar(
+         leading: Container(),
+         elevation: 3,
+         backgroundColor: primaryColor,
+         title: Text("\n" + "Help", style: TextStyle(fontSize: 20 )),
+         centerTitle: true,
+      )),
       body: Container(
         padding: EdgeInsets.all(40),
         child: Column(
           children: [
             Text(
-              "FAQ",
-              textAlign: TextAlign.center,
+              "Patch Notes",
+          textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.blueAccent,
+                  color: primaryColor,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold),
+                  fontWeight: FontWeight.bold,
+              ),
             ),
+
             Card(
               child: Column(
                 mainAxisSize: MainAxisSize.min,

@@ -26,7 +26,7 @@ class PdfService {
     doc.addPage(
       pw.Page(
         build: (pw.Context context) => pw.Center(
-          child: pw.Text('Hello World!'),
+          child: pw.Text('Project Alek'),
         ),
       ),
     );
@@ -45,7 +45,7 @@ class PdfService {
   }
 
   File resultToPdf(ResultModel data){
-    //TODO: We need to fill this with data from the provider
+    
     return null;
   }
 }

@@ -4,6 +4,8 @@ import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../theme.dart';
+
 class HistoryListItem extends StatelessWidget{
   final ResultModel listItem;
 
@@ -50,7 +52,7 @@ class HistoryListItem extends StatelessWidget{
                       ),
                       FlatButton(
                         child: Text("Back", style: TextStyle(color: Colors.white),),
-                        color: Colors.blueAccent,
+                        color: primaryColor,
                         minWidth: 1000,
                         onPressed: () {
                           Navigator.pop(context, false);
