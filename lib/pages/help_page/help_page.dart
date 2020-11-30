@@ -33,17 +33,6 @@ class HelpPage extends StatelessWidget{
         padding: EdgeInsets.all(40),
         child: Column(
           children: [
-
-            Text(
-              "Patch Notes",
-          textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Colors.blueAccent,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-              ),
-            ),
-
             Text(
               "FAQ",
               textAlign: TextAlign.center,
@@ -51,6 +40,32 @@ class HelpPage extends StatelessWidget{
                   color: Colors.blueAccent,
                   fontSize: 20,
                   fontWeight: FontWeight.bold),
+            ),
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const ListTile(
+                    title: Text('FAQ'),
+                    subtitle: Text('This is where the questions reside'),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      TextButton(
+                        child: const Text('More Questions'),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                      TextButton(
+                        child: const Text('Ask'),
+                        onPressed: () {/* ... */},
+                      ),
+                      const SizedBox(width: 8),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
