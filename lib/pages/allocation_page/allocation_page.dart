@@ -102,9 +102,17 @@ class _AllocationPageState extends State<AllocationPage> {
                                     temp)
                             )
                         );
+
+                        //Hashkey
+                        allocationProvider.state.hashKey = hs.hashJSON(
+                            hs.toJson("fake email://allocation_page:84ish",
+                                value.data["supply"],
+                                value.data["recipients"],
+                                value.data["timestamp"].toString(),
+                                temp)
+                        );
+
                         //Add calculated hashkey to the provider
-                        allocationProvider.state.hashKey =
-                            db.hashCode.toString();
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) {
