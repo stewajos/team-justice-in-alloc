@@ -74,13 +74,13 @@ class NavigationDrawerState extends State<NavigationDrawer> with SingleTickerPro
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
     return Material(
-      elevation: 8.0,
+      elevation: 3.0,
       child: Container(
           width: widthAnimation.value,
           color: primaryColor,
           child: Column(
             children: [
-              SizedBox(height: 40.0,),
+              SizedBox(height: 65.0,),
               SideNavTile(
                 title: allocationProvider.state.userEmail,
                 icon: Icons.person,

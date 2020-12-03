@@ -21,10 +21,8 @@ class EmailEntryPageState extends State<EmailEntryPage> {
     final allocationProvider = Provider.of<AllocationProvider>(context);
 
     TextEditingController emailController = new TextEditingController();
-    var emailInput;
 
     return Scaffold(
-
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -129,7 +129,7 @@ class ReportPageState extends State<ReportPage>{
                 child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
                 
                 onPressed: (){
-                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, hashCode.toString(), timestamp, itemSelection);
+                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, allocationProvider.state.hashKey, timestamp, itemSelection);
                   Navigator.pop(context);
                   Navigator.pop(context);
                   //emailService.sendTestEmail();
