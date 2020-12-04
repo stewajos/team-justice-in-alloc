@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "935483519937",
+    "firebase_url": "https://project-alek.firebaseio.com",
+    "project_id": "project-alek",
+    "storage_bucket": "project-alek.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:935483519937:android:1a7695048c36fe4ca83540",
+        "android_client_info": {
+          "package_name": "com.projalek.allocation_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "935483519937-t0ohqrb1npn5i8548cq6habj8967e20j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqsTZQCftrpdnFtt6Wv8TgC7_iRkRH15o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "935483519937-t0ohqrb1npn5i8548cq6habj8967e20j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
