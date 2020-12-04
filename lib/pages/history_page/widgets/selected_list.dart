@@ -1,6 +1,6 @@
 import 'package:allocation_app/model/result_model.dart';
 import 'package:allocation_app/pages/history_page/widgets/selected_list_item.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'history_list_item.dart';
 
