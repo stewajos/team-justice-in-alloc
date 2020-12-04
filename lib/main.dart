@@ -1,6 +1,5 @@
 import 'package:allocation_app/pages/email_entry_page/email_entry_page.dart';
 import 'package:allocation_app/providers.dart';
-import 'package:allocation_app/providers/allocation_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

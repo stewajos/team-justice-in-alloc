@@ -28,7 +28,7 @@ class ReportPage extends StatefulWidget {
   });
 
   @override
-  State<StatefulWidget> createState() {;
+  State<StatefulWidget> createState() {
     return new ReportPageState(
       supply: supply,
       recipients: recipients,
@@ -129,13 +129,15 @@ class ReportPageState extends State<ReportPage>{
                 child: Text("CONTINUE", style: TextStyle(color: Colors.white),),
                 
                 onPressed: (){
-                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, hashCode.toString(), timestamp, itemSelection);
+                  allocationProvider.saveHistory(supply, allocationProvider.state.userEmail, recipients, allocationProvider.state.hashKey, timestamp, itemSelection);
                   Navigator.pop(context);
                   Navigator.pop(context);
                   //emailService.sendTestEmail();
                   //get directory for the pdf service
                   // File tmp;
-                  pdfService.writeTestFile().then((value) =>
+                  pdfService.writeTestFile(allocationProvider.state.userEmail,
+                      allocationProvider.state.hashKey,
+                      itemSelection, supply, recipients, timestamp).then((value) =>
                     emailService.sendResultEmail(allocationProvider.state.userEmail, value));
 
                   // emailService.sendResultEmail(allocationProvider.state.userEmail, tmp);

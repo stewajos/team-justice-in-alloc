@@ -1,5 +1,5 @@
 name: allocation_app
-description: A new Flutter project.
+description: App built to allocate scarce resources.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -20,6 +20,7 @@ dependencies:
   flutter:
     sdk: flutter
   firebase_core: ^0.5.0
+  flutter_launcher_icons: 0.8.1
   firebase_remote_config: ^0.4.0+2
   cloud_firestore: ^0.14.1+3
   cloud_firestore_web: ^0.2.0+4
@@ -35,6 +36,11 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+
+flutter_icons:
+  image_path: "icon/icon.png"
+  android: true
+  ios: true
 
 dev_dependencies:
   flutter_test:
