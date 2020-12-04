@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">935483519937-t0ohqrb1npn5i8548cq6habj8967e20j.apps.googleusercontent.com</string>
+    <string name="firebase_database_url" translatable="false">https://project-alek.firebaseio.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">935483519937</string>
+    <string name="google_api_key" translatable="false">AIzaSyCqsTZQCftrpdnFtt6Wv8TgC7_iRkRH15o</string>
+    <string name="google_app_id" translatable="false">1:935483519937:android:1a7695048c36fe4ca83540</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCqsTZQCftrpdnFtt6Wv8TgC7_iRkRH15o</string>
+    <string name="google_storage_bucket" translatable="false">project-alek.appspot.com</string>
+    <string name="project_id" translatable="false">project-alek</string>
+</resources>
