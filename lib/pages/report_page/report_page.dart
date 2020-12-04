@@ -137,7 +137,7 @@ class ReportPageState extends State<ReportPage>{
                   // File tmp;
                   pdfService.writeTestFile(allocationProvider.state.userEmail,
                       allocationProvider.state.hashKey,
-                      allocationProvider.state.recipientList, supply, recipients, timestamp).then((value) =>
+                      itemSelection, supply, recipients, timestamp).then((value) =>
                     emailService.sendResultEmail(allocationProvider.state.userEmail, value));
 
                   // emailService.sendResultEmail(allocationProvider.state.userEmail, tmp);

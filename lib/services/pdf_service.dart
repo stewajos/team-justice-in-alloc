@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:allocation_app/model/recipient_model.dart';
 import 'package:allocation_app/model/result_model.dart';
-import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -20,9 +19,19 @@ class PdfService {
     return File('$path/result.pdf');
   }
 
-  Future<File> writeTestFile(String userEmail, String hashKey, List<RecipientModel> recipients, int supply, int numApplicants, String timestamp) async {
+  Future<File> writeTestFile(String userEmail, String hashKey, List<String> recipients, int supply, int numApplicants, String timestamp) async {
     final file = await _localFile;
     final doc = pw.Document();
+    List<List<String>> choiceList = new List();
+    choiceList.add(<String>['Applicant Number','Applicant ID']);
+    print(recipients.length);
+    for(int i = 0; i < recipients.length; i++){
+      List<String> choices = <String>[
+        (i+1).toString(),
+        recipients[i],
+      ];
+      choiceList.add(choices);
+    }
 
     doc.addPage(pw.MultiPage(
      pageFormat: PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
@@ -46,7 +55,7 @@ class PdfService {
          margin: const pw.EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
          child: pw.Text(
            "Page ${context.pageNumber} of ${context.pagesCount}",
-           style: pw.Theme.of(context).defaultTextStyle.copyWith(color: PdfColors.grey50)));
+           style: pw.Theme.of(context).defaultTextStyle.copyWith(color: PdfColors.grey)));
       },
       build: (pw.Context context) => <pw.Widget>[
         pw.Header(
@@ -69,17 +78,17 @@ class PdfService {
               'Date Ran: $timestamp\n'
               'Supply Quantity: $supply \n'
               'Number of Applicants: $numApplicants\n',
-          style: pw.TextStyle(fontSize: 12)
+          style: pw.TextStyle(fontSize: 10)
         ),
         pw.Paragraph(
           text: 'Applicants Selected',
-          style: pw.TextStyle(fontSize: 15, fontWeight: pw.FontWeight.bold),
+          style: pw.TextStyle(fontSize: 15, fontWeight: pw.FontWeight.bold,
+              decoration: pw.TextDecoration.underline),
         ),
-        
-
-      ]
-
-    )
+        pw.Table.fromTextArray(context: context, data: choiceList,
+            cellAlignment: pw.Alignment.center),
+      ],
+    ),
     );
 
     file.writeAsBytesSync(doc.save());
